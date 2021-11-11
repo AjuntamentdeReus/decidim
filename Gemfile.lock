@@ -194,6 +194,8 @@ GIT
 PATH
   remote: .
   specs:
+    decidim-processes_admin_stats (0.19.1)
+      decidim-core (~> 0.19.1)
     decidim-removable_authorizations (0.19.1)
       decidim-core (~> 0.19.1)
 
@@ -809,6 +811,7 @@ DEPENDENCIES
   byebug
   decidim!
   decidim-dev!
+  decidim-processes_admin_stats!
   decidim-removable_authorizations!
   deface
   faker (~> 1.8.4)
