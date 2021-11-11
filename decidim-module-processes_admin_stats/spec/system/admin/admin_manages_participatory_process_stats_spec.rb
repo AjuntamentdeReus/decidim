@@ -17,10 +17,10 @@ describe "Admin manages participatory process stats", type: :system do
 
   before do
     # rubocop:disable RSpec/AnyInstance
-    allow_any_instance_of(Decidim::ParticipatoryProcesses::Admin::ParticipationStats).to receive(:total_users_count).and_return(total_users)
-    allow_any_instance_of(Decidim::ParticipatoryProcesses::Admin::ParticipationStats).to receive(:verified_users_count).and_return(verified_users)
-    allow_any_instance_of(Decidim::ParticipatoryProcesses::Admin::ParticipationStats).to receive(:active_users_count).and_return(25)
-    allow_any_instance_of(Decidim::ParticipatoryProcesses::Admin::ParticipationStats).to receive(:proposals_voters_count).and_return(voting_users)
+    allow_any_instance_of(Decidim::ProcessesAdminStats::Admin::ParticipationStats).to receive(:total_users_count).and_return(total_users)
+    allow_any_instance_of(Decidim::ProcessesAdminStats::Admin::ParticipationStats).to receive(:verified_users_count).and_return(verified_users)
+    allow_any_instance_of(Decidim::ProcessesAdminStats::Admin::ParticipationStats).to receive(:active_users_count).and_return(25)
+    allow_any_instance_of(Decidim::ProcessesAdminStats::Admin::ParticipationStats).to receive(:proposals_voters_count).and_return(voting_users)
     # rubocop:enable RSpec/AnyInstance
 
     switch_to_host(organization.host)
