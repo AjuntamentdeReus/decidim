@@ -1,0 +1,2 @@
+<!-- insert_bottom "div + ul" -->
+<%= render partial: "layouts/decidim/removable_authorizations/admin/authorizations_item" %>

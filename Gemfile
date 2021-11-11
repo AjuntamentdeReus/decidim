@@ -7,6 +7,7 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.19-stable" }
 
 gem "decidim", DECIDIM_VERSION
+gem "decidim-removable_authorizations", path: "."
 
 gem "bootsnap", require: false
 gem "puma", "~> 3.0"
