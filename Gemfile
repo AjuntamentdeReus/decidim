@@ -4,13 +4,9 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-decidim_path = if ENV["RAILS_ENV"] == "development"
-                 { path: "#{ENV['DEV_DIR']}/decidim-populate" }
-               else
-                 { git: "https://github.com/populatetools/decidim", branch: "reus-custom-0.19.0" }
-               end
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.19-stable" }
 
-gem "decidim", decidim_path
+gem "decidim", DECIDIM_VERSION
 
 gem "bootsnap", require: false
 gem "puma", "~> 3.0"
@@ -26,7 +22,7 @@ gem "sidekiq", "~> 5.2.1"
 group :development, :test do
   gem "byebug", platform: :mri
   gem "rspec"
-  gem "decidim-dev", decidim_path
+  gem "decidim-dev", DECIDIM_VERSION
 end
 
 group :development do
