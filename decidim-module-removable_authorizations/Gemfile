@@ -11,6 +11,7 @@ DECIDIM_VERSION = Decidim::RemovableAuthorizations::DECIDIM_VERSION
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 
+gem "bootsnap", require: false
 gem "puma", "~> 3.12"
 gem "uglifier", "~> 4.1"
 
