@@ -1,13 +1,7 @@
-PATH
-  remote: .
-  specs:
-    decidim-processes_admin_stats (0.25.1)
-      decidim-core (~> 0.25.1)
-    decidim-removable_authorizations (0.25.1)
-      decidim-core (~> 0.25.1)
-
-PATH
-  remote: /home/edu/proyectos/decidim/decidim
+GIT
+  remote: https://github.com/decidim/decidim.git
+  revision: 4eb4586d74e4f2c7d10acd6b9aa035619e8da756
+  branch: release/0.25-stable
   specs:
     decidim (0.25.1)
       decidim-accountability (= 0.25.1)
@@ -180,6 +174,14 @@ PATH
       decidim-forms (= 0.25.1)
     decidim-verifications (0.25.1)
       decidim-core (= 0.25.1)
+
+PATH
+  remote: .
+  specs:
+    decidim-processes_admin_stats (0.25.1)
+      decidim-core (~> 0.25.1)
+    decidim-removable_authorizations (0.25.1)
+      decidim-core (~> 0.25.1)
 
 GEM
   remote: https://rubygems.org/
