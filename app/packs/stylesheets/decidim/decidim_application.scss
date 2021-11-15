@@ -16,7 +16,5 @@ $primary: #9C8F00;
 // $facebook: #3b5998;
 // $google: #dd4b39;
 
-@import "decidim/application";
-
 // Custom theme
-@import "reus/main";
+@import "../reus/main";

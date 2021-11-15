@@ -1,5 +1,7 @@
 // Utilities
-@import "helpers/**/*";
+@import "helpers/breakpoints";
+@import "helpers/colors";
+@import "helpers/fonts";
 
 // Base rules
 @import "html";
