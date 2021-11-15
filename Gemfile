@@ -18,7 +18,7 @@ gem "rollbar"
 gem "savon"
 gem "progressbar"
 gem "deface"
-gem "letter_opener_web", "~> 1.3.0"
+gem "letter_opener_web", "~> 1.4"
 gem "sidekiq", "~> 5.2.1"
 
 group :development, :test do
