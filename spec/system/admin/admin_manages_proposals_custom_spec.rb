@@ -46,7 +46,7 @@ describe "Admin manages proposals", type: :system do
 
       visit manage_component_path(component)
 
-      assert page.has_content? "CONTACTE"
+      assert page.has_content? "Contacte"
       assert page.has_content? official_name
       assert page.has_content? telephone_number
     end
