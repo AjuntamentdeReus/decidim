@@ -1,2 +1,0 @@
-<!-- insert_bottom "div.secondary-nav > ul" -->
-<%= render partial: "layouts/decidim/processes_admin_stats/admin/stats_item" %>

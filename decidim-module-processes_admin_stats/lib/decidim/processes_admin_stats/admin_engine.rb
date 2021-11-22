@@ -23,6 +23,16 @@ module Decidim
         end
       end
 
+      initializer "decidim_processes_admin.admin_process_add_stats" do
+        Decidim.menu :admin_participatory_process_menu do |menu|
+          menu.add_item :stats,
+            I18n.t("stats", scope: "decidim.processes_admin_stats.admin.menu.participatory_processes_submenu"),
+            decidim_processes_admin_stats_admin.participatory_process_stats_path(current_participatory_space),
+            active: is_active_link?(decidim_processes_admin_stats_admin.participatory_process_stats_path(current_participatory_space)),
+            if: allowed_to?(:read, :component)
+        end
+      end
+
       def load_seed
         nil
       end
