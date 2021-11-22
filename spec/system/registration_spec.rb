@@ -16,6 +16,10 @@ describe "Registration", type: :system do
 
   before do
     switch_to_host(organization.host)
+    visit decidim.root_path
+    within_language_menu do
+      click_link "Català"
+    end
     visit decidim.new_user_registration_path
   end
 

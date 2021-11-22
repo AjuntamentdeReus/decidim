@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CustomAttributeObfuscator < Decidim::AttributeObfuscator
+class CustomAttributeObfuscator < Decidim::RemovableAuthorizations::AttributeObfuscator
 
   def self.document_number(value, success = true)
     if success

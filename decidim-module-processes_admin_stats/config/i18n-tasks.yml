@@ -1,0 +1,10 @@
+---
+
+base_locale: en
+locales: [en]
+
+ignore_unused:
+  - decidim.processes_admin_stats.stats.participatory_processes.*
+
+ignore_missing:
+  - decidim.participatory_processes.scopes.global
