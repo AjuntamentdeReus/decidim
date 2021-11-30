@@ -68,7 +68,7 @@ es:
         authorize: Autorizar
   layouts:
     decidim:
-      wrapper:
+      main_footer:
         accessibility: Accesibilidad
         accessibility_link_title: Consulta la política de accesibilidad
         city_council_address: "© Ayuntamiento de Reus  Plaza del Mercadal · 43201 Reus"
