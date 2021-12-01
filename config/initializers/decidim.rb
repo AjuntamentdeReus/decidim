@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Decidim.configure do |config|
-  config.application_name = "My Application Name"
+  config.application_name = "Participa Reus"
   config.mailer_sender = Rails.application.secrets.mailer_sender
   config.default_locale = :ca
   config.available_locales = [:ca, :es]
