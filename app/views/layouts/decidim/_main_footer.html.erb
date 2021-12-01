@@ -21,7 +21,7 @@
           <strong><%= t('.follow_us') %></strong>
         </small><br>
         <% if current_organization.twitter_handler.present? %>
-          <a target="_blank" title="Twitter" href="https://twitter.com/<%= current_organization.twitter_handler %>">
+          <a target="_blank" title="Twitter" rel="decidim" href="https://twitter.com/<%= current_organization.twitter_handler %>">
             <span class="fa-stack fa-2x">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -29,7 +29,7 @@
           </a>
         <% end %>
         <% if current_organization.facebook_handler.present? %>
-          <a target="_blank" title="Facebook" href="https://www.facebook.com/<%= current_organization.facebook_handler %>">
+          <a target="_blank" title="Facebook" rel="decidim" href="https://www.facebook.com/<%= current_organization.facebook_handler %>">
             <span class="fa-stack fa-2x">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -53,7 +53,7 @@
         977 010 010 · <a href="mailto:ajuntament@reus.cat" title="envia un correu electrònic a l'Ajuntament de Reus">ajuntament@reus.cat</a></small>
       </div>
       <div class="medium-6 small-12 columns">
-        <a href="http://www.reus.cat" target="_blank" title="<%= t('.reus_link_title') %>">
+        <a href="http://www.reus.cat" rel="decidim" target="_blank" title="<%= t('.reus_link_title') %>">
           <%= image_pack_tag("media/images/logo-reus-footer.png", alt: "Ajuntament de Reus" ) %>
         </a>
       </div>
