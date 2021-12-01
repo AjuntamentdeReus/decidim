@@ -1,16 +1,19 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or any plugin's
-// vendor/assets/javascripts directory can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file. JavaScript code in this file should be added after the last require_* statement.
-//
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
-//
-//= require rails-ujs
-//= require activestorage
-//= require_tree .
-//= require decidim
+import Logo from "./../../images/logo-reus-negatiu.png"
+
+// add pre-header with the reus ajuntament logo
+document.addEventListener("DOMContentLoaded", () => {
+  const div = document.createElement("div")
+  const img = new Image()
+  img.src = Logo
+
+  div.className = "title-bar"
+  div.innerHTML = `<div class="row column">
+    <div class="logo-wrapper">
+      <a rel="decidim" href="https://www.reus.cat/" target="_blank">
+        <img src="${img.src}" alt="Ajuntament de Reus" />
+      </a>
+    </div>
+  </div>`
+
+  document.body.prepend(div)
+})
