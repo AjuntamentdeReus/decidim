@@ -1,3 +1,4 @@
+<!-- insert_before ".main-footer" -->
 <footer>
   <section class="footer-ajuntament bg-black py-5">
     <div class="row column">
