@@ -9,6 +9,7 @@ DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "rele
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
+gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
 
 gem "bootsnap", require: false
 gem "puma", ">= 4.3"

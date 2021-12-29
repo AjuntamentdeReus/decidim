@@ -175,6 +175,15 @@ GIT
     decidim-verifications (0.25.1)
       decidim-core (= 0.25.1)
 
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 12fbd0ee45100aff16f4feb341286b76325804f6
+  branch: develop
+  specs:
+    decidim-term_customizer (0.25.0)
+      decidim-admin (~> 0.25.0)
+      decidim-core (~> 0.25.0)
+
 PATH
   remote: .
   specs:
@@ -837,6 +846,7 @@ DEPENDENCIES
   decidim-dev!
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
+  decidim-term_customizer!
   deface
   faker (~> 2.14)
   letter_opener_web (~> 1.4)

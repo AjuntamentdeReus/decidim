@@ -25,6 +25,9 @@ public/uploads
 .rbenv-vars
 .rspec-failures
 
+# ActiveStorage
+storage
+
 # Node
 /public/decidim-packs
 /public/packs
