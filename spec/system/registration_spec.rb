@@ -4,11 +4,11 @@ require "spec_helper"
 require "rails_helper"
 
 def fill_registration_form
-  fill_in :user_name, with: "Nikola Tesla"
-  fill_in :user_nickname, with: "the-greatest-genius-in-history"
-  fill_in :user_email, with: "nikola.tesla@example.org"
-  fill_in :user_password, with: "sekritpass123"
-  fill_in :user_password_confirmation, with: "sekritpass123"
+  fill_in :registration_user_name, with: "Nikola Tesla"
+  fill_in :registration_user_nickname, with: "the-greatest-genius-in-history"
+  fill_in :registration_user_email, with: "nikola.tesla@example.org"
+  fill_in :registration_user_password, with: "sekritpass123"
+  fill_in :registration_user_password_confirmation, with: "sekritpass123"
 end
 
 describe "Registration", type: :system do
@@ -27,12 +27,12 @@ describe "Registration", type: :system do
     describe "on first sight" do
       it "shows fields empty" do
         expect(page).to have_content("Crea un compte per poder participar")
-        expect(page).to have_field("user_name", with: "")
-        expect(page).to have_field("user_nickname", with: "")
-        expect(page).to have_field("user_email", with: "")
-        expect(page).to have_field("user_password", with: "")
-        expect(page).to have_field("user_password_confirmation", with: "")
-        expect(page).to have_field("user_newsletter", checked: false)
+        expect(page).to have_field("registration_user_name", with: "")
+        expect(page).to have_field("registration_user_nickname", with: "")
+        expect(page).to have_field("registration_user_email", with: "")
+        expect(page).to have_field("registration_user_password", with: "")
+        expect(page).to have_field("registration_user_password_confirmation", with: "")
+        expect(page).to have_field("registration_user_newsletter", checked: false)
       end
     end
   end
@@ -53,7 +53,7 @@ describe "Registration", type: :system do
       click_button "Marca i continua"
       expect(page).to have_current_path decidim.new_user_registration_path
       expect(page).to have_css("#sign-up-newsletter-modal", visible: false)
-      expect(page).to have_field("user_newsletter", checked: true)
+      expect(page).to have_field("registration_user_newsletter", checked: true)
     end
 
     it "submit after modal has been opened and selected an option" do
@@ -67,14 +67,14 @@ describe "Registration", type: :system do
         find("*[type=submit]").click
       end
       expect(page).to have_current_path decidim.new_user_registration_path
-      expect(page).to have_field("user_newsletter", checked: false)
+      expect(page).to have_field("registration_user_newsletter", checked: false)
     end
   end
 
   context "when newsletter checkbox is checked but submit fails" do
     before do
       fill_registration_form
-      page.check("user_newsletter")
+      page.check("registration_user_newsletter")
     end
 
     it "keeps the user newsletter checkbox true value" do
@@ -82,7 +82,7 @@ describe "Registration", type: :system do
         find("*[type=submit]").click
       end
       expect(page).to have_current_path decidim.new_user_registration_path
-      expect(page).to have_field("user_newsletter", checked: true)
+      expect(page).to have_field("registration_user_newsletter", checked: true)
     end
   end
 end
