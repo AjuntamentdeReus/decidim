@@ -16,24 +16,26 @@ module Decidim
       end
 
       initializer "decidim_removable_authorizations.decidim_additions" do
-        Decidim::Authorization.class_eval do
-          include Decidim::RemovableAuthorizations::AuthorizationTraceability
+        config.to_prepare do
+          Decidim::Authorization.class_eval do
+            include Decidim::RemovableAuthorizations::AuthorizationTraceability
 
-          def self.log_presenter_class_for(_log)
-            Decidim::RemovableAuthorizations::AdminLog::AuthorizationPresenter
+            def self.log_presenter_class_for(_log)
+              Decidim::RemovableAuthorizations::AdminLog::AuthorizationPresenter
+            end
           end
-        end
 
-        Decidim::Verifications::AuthorizeUser.class_eval do
-          prepend Decidim::RemovableAuthorizations::Verifications::AuthorizeUserOverrides
-        end
+          Decidim::Verifications::AuthorizeUser.class_eval do
+            prepend Decidim::RemovableAuthorizations::Verifications::AuthorizeUserOverrides
+          end
 
-        Decidim::AuthorizationHandler.class_eval do
-          prepend Decidim::RemovableAuthorizations::AuthorizationHandlerOverrides
-        end
+          Decidim::AuthorizationHandler.class_eval do
+            prepend Decidim::RemovableAuthorizations::AuthorizationHandlerOverrides
+          end
 
-        Decidim::AdminLog::UserPresenter.class_eval do
-          prepend Decidim::RemovableAuthorizations::AdminLog::UserPresenterOverrides
+          Decidim::AdminLog::UserPresenter.class_eval do
+            prepend Decidim::RemovableAuthorizations::AdminLog::UserPresenterOverrides
+          end
         end
       end
     end

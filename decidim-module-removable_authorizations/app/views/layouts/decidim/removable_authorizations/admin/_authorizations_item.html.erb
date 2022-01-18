@@ -1,5 +1,0 @@
-<% if allowed_to? :delete, :authorization %>
-  <li <% if is_active_link?(decidim_removable_authorizations_admin.authorizations_path) %> class="is-active" <% end %>>
-    <%= link_to t("menu.authorizations", scope: "decidim.admin"), decidim_removable_authorizations_admin.authorizations_path %>
-  </li>
-<% end %>

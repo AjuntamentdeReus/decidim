@@ -36,7 +36,7 @@ end
           <div class="row column topbar">
             <div class="logo-wrapper">
               <a href="http://www.reus.cat">
-                <%= image_tag("logo-reus-negatiu.png", alt: "Ayuntamiento de Reus") %>
+                <%= image_pack_tag("media/images/logo-reus-negatiu.png", alt: "Ayuntamiento de Reus") %>
               </a>
             </div>
             <%= render partial: "layouts/decidim/topbar_search" %>
@@ -94,7 +94,7 @@ end
             <% if current_organization %>
               <%= link_to decidim.root_url(host: current_organization.host) do %>
                 <% if current_organization.logo.present? %>
-                  <%= image_tag current_organization.logo.url %>
+                  <%= image_tag current_organization.attached_uploader(:logo).variant_path(:medium), alt: t("logo", scope: "decidim.accessibility", organization: current_organization.name) %>
                 <% end %>
               <% end %>
             <% end %>
@@ -142,7 +142,7 @@ end
       <!-- <div class="main-footer">
         <% if current_organization.official_img_footer? %>
           <%= link_to  current_organization.official_url, class: "main-footer__badge" do %>
-            <%= image_tag current_organization.official_img_footer.url.to_s , alt: current_organization.name %>
+            <%= image_tag current_organization.attached_uploader(:official_img_footer), alt: t("logo", scope: "decidim.accessibility", organization: current_organization.name) %>
           <% end %>
         <% end %>
         <div class="row">
@@ -214,7 +214,7 @@ end
             </div>
             <div class="medium-6 small-12 columns">
               <a href="http://www.reus.cat" target="_blank" title="<%= t('.reus_link_title') %>">
-                <%= image_tag("logo-reus-footer.png", alt: "Ajuntament de Reus" ) %>
+                <%= image_pack_tag("media/images/logo-reus-footer.png", alt: "Ajuntament de Reus" ) %>
               </a>
             </div>
           </div>
@@ -225,7 +225,7 @@ end
               <a rel="license" class="cc-badge"
                  href="http://creativecommons.org/licenses/by-sa/4.0/"
                  target="_blank">
-                <%= image_tag("decidim/cc-badge.png", alt: "Creative Commons License" ) %>
+                <%= image_pack_tag("media/images/cc-badge.png", alt: "Creative Commons License" ) %>
               </a>
               <%= t('layouts.decidim.footer.made_with_open_source').html_safe %>
             </div>
@@ -234,7 +234,7 @@ end
                 <a rel="decidim"
                    href="https://decidim.org/"
                    target="_blank">
-                  <%= image_tag("decidim/decidim-logo.svg", alt: "Decidim Logo" ) %>
+                  <%= image_pack_tag("media/images/decidim-logo.svg", alt: "Decidim Logo" ) %>
                 </a>
               </div>
             </div>

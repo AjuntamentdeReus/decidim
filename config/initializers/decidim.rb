@@ -53,90 +53,88 @@ Rails.application.config.i18n.default_locale = Decidim.default_locale
 TELEPHONE_NUMBER_REGEXP = /^\d{9,}$/
 NORMALIZE_TELEPHONE_REGEXP = /\.|\ |\-|\_/
 
-::Decidim::RegistrationForm.class_eval do
-  attribute :official_name_custom, String
-  attribute :telephone_number_custom, String
+Rails.application.reloader.to_prepare do
+  ::Decidim::RegistrationForm.class_eval do
+    attribute :official_name_custom, String
+    attribute :telephone_number_custom, String
 
-  validates :official_name_custom, presence: true, length: { minimum: 3 }
-  validates :telephone_number_custom, presence: true
-  validate :telephone_number_custom_format
+    validates :official_name_custom, presence: true, length: { minimum: 3 }
+    validates :telephone_number_custom, presence: true
+    validate :telephone_number_custom_format
 
-  def telephone_number_custom_format
-    self.telephone_number_custom = telephone_number_custom.gsub(NORMALIZE_TELEPHONE_REGEXP, "")
+    def telephone_number_custom_format
+      self.telephone_number_custom = telephone_number_custom.gsub(NORMALIZE_TELEPHONE_REGEXP, "")
 
-    unless TELEPHONE_NUMBER_REGEXP =~ telephone_number_custom
-      errors.add(:telephone_number_custom, I18n.t("custom_errors.telephone_format"))
+      unless TELEPHONE_NUMBER_REGEXP =~ telephone_number_custom
+        errors.add(:telephone_number_custom, I18n.t("custom_errors.telephone_format"))
+      end
     end
   end
 
-end
+  ::Decidim::AccountForm.class_eval do
+    attribute :official_name_custom, String
+    attribute :telephone_number_custom, String
 
-::Decidim::AccountForm.class_eval do
-  attribute :official_name_custom, String
-  attribute :telephone_number_custom, String
+    validates :official_name_custom, presence: true, length: { minimum: 3 }, if: ->(form) do
+      form.current_user.official_name_custom.present?
+    end
+    validates :telephone_number_custom, presence: true, if: ->(form) do
+      form.current_user.telephone_number_custom.present?
+    end
 
-  validates :official_name_custom, presence: true, length: { minimum: 3 }, if: ->(form) do
-    form.current_user.official_name_custom.present?
-  end
-  validates :telephone_number_custom, presence: true, if: ->(form) do
-    form.current_user.telephone_number_custom.present?
-  end
+    validate :telephone_number_custom_format
 
-  validate :telephone_number_custom_format
+    private
 
-  private
+    def telephone_number_custom_format
+      return unless telephone_number_custom.present?
 
-  def telephone_number_custom_format
-    return unless telephone_number_custom.present?
+      self.telephone_number_custom = telephone_number_custom.gsub(NORMALIZE_TELEPHONE_REGEXP, "")
 
-    self.telephone_number_custom = telephone_number_custom.gsub(NORMALIZE_TELEPHONE_REGEXP, "")
-
-    unless TELEPHONE_NUMBER_REGEXP =~ telephone_number_custom
-      errors.add(:telephone_number_custom, I18n.t("custom_errors.telephone_format"))
+      unless TELEPHONE_NUMBER_REGEXP =~ telephone_number_custom
+        errors.add(:telephone_number_custom, I18n.t("custom_errors.telephone_format"))
+      end
     end
   end
 
-end
+  ::Decidim::CreateRegistration.class_eval do
 
-::Decidim::CreateRegistration.class_eval do
+    private
 
-  private
+    def create_user
+      @user = ::Decidim::User.create!(
+        # defined by Decidim
+        email: form.email,
+        name: form.name,
+        nickname: form.nickname,
+        password: form.password,
+        password_confirmation: form.password_confirmation,
+        organization: form.current_organization,
+        tos_agreement: form.tos_agreement,
+        newsletter_notifications_at: form.newsletter_at,
+        email_on_notification: true,
+        accepted_tos_version: form.current_organization.tos_version,
+        # custom
+        official_name_custom: form.official_name_custom,
+        telephone_number_custom: form.telephone_number_custom
+      )
+    end
+  end
 
-  def create_user
-    @user = ::Decidim::User.create!(
+  ::Decidim::UpdateAccount.class_eval do
+
+    private
+
+    def update_personal_data
       # defined by Decidim
-      email: form.email,
-      name: form.name,
-      nickname: form.nickname,
-      password: form.password,
-      password_confirmation: form.password_confirmation,
-      organization: form.current_organization,
-      tos_agreement: form.tos_agreement,
-      newsletter_notifications_at: form.newsletter_at,
-      email_on_notification: true,
-      accepted_tos_version: form.current_organization.tos_version,
+      @user.name = @form.name
+      @user.nickname = @form.nickname
+      @user.email = @form.email
+      @user.personal_url = @form.personal_url
+      @user.about = @form.about
       # custom
-      official_name_custom: form.official_name_custom,
-      telephone_number_custom: form.telephone_number_custom
-    )
+      @user.official_name_custom = @form.official_name_custom
+      @user.telephone_number_custom = @form.telephone_number_custom
+    end
   end
-
-end
-
-::Decidim::UpdateAccount.class_eval do
-
-  private
-
-  def update_personal_data
-    # defined by Decidim
-    @user.name = @form.name
-    @user.nickname = @form.nickname
-    @user.email = @form.email
-    @user.personal_url = @form.personal_url
-    @user.about = @form.about
-    # custom
-    @user.official_name_custom = @form.official_name_custom
-    @user.telephone_number_custom = @form.telephone_number_custom
-  end
-
 end
