@@ -4,14 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.20-stable" }
+DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.21-stable" }
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
 
 gem "bootsnap", require: false
-gem "puma", "~> 3.0"
+gem "puma", ">= 4.3"
 gem "uglifier", ">= 1.3.0"
 gem "faker", "~> 1.8.4"
 gem "rollbar"

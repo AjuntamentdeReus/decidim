@@ -3,7 +3,7 @@
 module Decidim
   # This holds the decidim-meetings version.
   module ProcessesAdminStats
-    VERSION = "0.20.1"
-    DECIDIM_VERSION = "~> 0.20.1"
+    VERSION = "0.21.0"
+    DECIDIM_VERSION = "~> 0.21.0"
   end
 end
