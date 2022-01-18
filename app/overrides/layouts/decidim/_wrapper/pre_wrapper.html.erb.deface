@@ -1,0 +1,10 @@
+<!-- insert_before ".title-bar" -->
+<div class="title-bar bt-none">
+  <div class="row column">
+    <div class="logo-wrapper">
+      <a title="<%= t('layouts.decidim.main_footer.reus_link_title') %>" rel="decidim" href="https://www.reus.cat/" target="_blank">
+        <%= image_pack_tag("media/images/logo-reus-negatiu.png", alt: "Ajuntament de Reus" ) %>
+      </a>
+    </div>
+  </div>
+</div>
