@@ -11,7 +11,7 @@ gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
 
 gem "bootsnap", require: false
-gem "puma", "~> 3.0"
+gem "puma", "~> 3.12"
 gem "uglifier", ">= 1.3.0"
 gem "faker", "~> 1.8.4"
 gem "rollbar"
