@@ -188,9 +188,9 @@ PATH
   remote: .
   specs:
     decidim-processes_admin_stats (0.25.1)
-      decidim-core (= 0.25.1)
+      decidim-core (~> 0.25.1)
     decidim-removable_authorizations (0.25.1)
-      decidim-core (= 0.25.1)
+      decidim-core (~> 0.25.1)
 
 GEM
   remote: https://rubygems.org/
