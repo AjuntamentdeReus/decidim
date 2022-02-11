@@ -10,6 +10,7 @@ gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
+gem "decidim-decidim_awesome", git: "https://github.com/Platoniq/decidim-module-decidim_awesome", branch: "main"
 
 gem "bootsnap", require: false
 gem "puma", ">= 4.3"
