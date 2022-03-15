@@ -11,6 +11,8 @@ gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
 gem "decidim-decidim_awesome", "~> 0.8"
+gem "decidim-question_captcha", git: "https://github.com/PopulateTools/decidim-module-question_captcha.git", branch: "0.26_update"
+gem "acts_as_textcaptcha", "~> 4.5.1"
 
 gem "bootsnap", require: false
 gem "puma", ">= 4.3"
