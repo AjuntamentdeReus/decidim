@@ -43,7 +43,7 @@ describe "Account", type: :system do
           expect(page).to have_content("correctament")
         end
 
-        within ".title-bar" do
+        within "div.title-bar nav.topbar__user__logged" do
           expect(page).to have_content("Nikola Tesla")
         end
 
