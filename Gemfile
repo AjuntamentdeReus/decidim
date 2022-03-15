@@ -4,12 +4,13 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = { git: "https://github.com/decidim/decidim.git", branch: "release/0.25-stable" }
+DECIDIM_VERSION = "0.25.2"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", path: "."
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
+gem "decidim-decidim_awesome", "~> 0.8"
 
 gem "bootsnap", require: false
 gem "puma", ">= 4.3"
