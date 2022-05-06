@@ -3,8 +3,8 @@
 Decidim.configure do |config|
   config.application_name = "Participa Reus"
   config.mailer_sender = Rails.application.secrets.mailer_sender
-  config.default_locale = :ca
-  config.available_locales = [:ca, :es]
+
+  config.available_locales = %i(ca es en)
 
   # Geocoder configuration
 
@@ -46,9 +46,6 @@ end
 Decidim::Verifications.register_workflow(:census_authorization_handler) do |auth|
   auth.form = "CensusAuthorizationHandler"
 end
-
-Rails.application.config.i18n.available_locales = Decidim.available_locales
-Rails.application.config.i18n.default_locale = Decidim.default_locale
 
 TELEPHONE_NUMBER_REGEXP = /^\d{9,}$/
 NORMALIZE_TELEPHONE_REGEXP = /\.|\ |\-|\_/
