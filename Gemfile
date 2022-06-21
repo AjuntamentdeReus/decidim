@@ -23,7 +23,7 @@ gem "savon"
 gem "progressbar"
 gem "deface"
 gem "letter_opener_web", "~> 1.4"
-gem "sidekiq", "~> 5.2.1"
+gem "sidekiq", "~> 6.4.1"
 
 group :development, :test do
   gem "byebug", platform: :mri
