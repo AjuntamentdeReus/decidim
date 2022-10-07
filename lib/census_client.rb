@@ -67,7 +67,7 @@ class CensusClient
     message.merge(
       dni: obfuscated_document_number(message[:dni]),
       cp: obfuscated_postal_code(message[:cp]),
-      datanaixement: obfuscated_formatted_birthdate(message[:datanaixement])
+      datan: obfuscated_formatted_birthdate(message[:datan])
     )
   end
 
