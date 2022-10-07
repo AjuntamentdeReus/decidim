@@ -7,7 +7,8 @@ Rollbar.configure do |config|
     "ActionController::InvalidCrossOriginRequest" => "ignore",
     "ActionController::RoutingError" => "ignore",
     "ActionController::UnknownFormat" => "ignore",
-    "ActiveRecord::RecordNotFound" => "info"
+    "ActiveRecord::RecordNotFound" => "info",
+    "ActiveStorage::InvariableError" => "ignore"
   )
 
   config.environment = ENV['ROLLBAR_ENV'].presence || Rails.env
