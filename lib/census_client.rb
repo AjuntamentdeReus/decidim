@@ -43,12 +43,8 @@ class CensusClient
     validate_parameters!(document_number, formatted_birthdate, postal_code)
 
     {
-      idioma: 'ca/es',
       dni: document_number,
-      letra: '', # letter is not checked by census
-      obs: '',
-      obj: '',
-      datanaixement: formatted_birthdate,
+      datan: formatted_birthdate,
       cp: postal_code
     }
   end
