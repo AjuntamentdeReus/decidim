@@ -18,8 +18,8 @@ class CensusClient
       # Try 12345678#315
       response_code = original_document_number.split("#").last
     else
-      response = client.call(:validarpadro_decidim, message: message)
-      response_code = response.body[:validarpadro_decidim_response][:result]
+      response = client.call(:padro_decidim_request, message: message)
+      response_code = response.body[:padro_decidim_response][:acces]
     end
 
     Rails.logger.info "[Census WS] Response code was: #{response_code}"
@@ -30,7 +30,7 @@ class CensusClient
   end
 
   def self.client
-    Savon.client(wsdl: census_endpoint)
+    Savon.client(wsdl: census_endpoint, ssl_verify_mode: :none)
   end
   private_class_method :client
 
