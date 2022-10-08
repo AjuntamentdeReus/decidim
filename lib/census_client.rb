@@ -18,8 +18,8 @@ class CensusClient
       # Try 12345678#315
       response_code = original_document_number.split("#").last
     else
-      response = client.call(:validarpadro_decidim, message: message)
-      response_code = response.body[:validarpadro_decidim_response][:result]
+      response = client.call(:padro_decidim_request, message: message)
+      response_code = response.body[:padro_decidim_response][:acces]
     end
 
     Rails.logger.info "[Census WS] Response code was: #{response_code}"
@@ -30,7 +30,7 @@ class CensusClient
   end
 
   def self.client
-    Savon.client(wsdl: census_endpoint)
+    Savon.client(wsdl: census_endpoint, ssl_verify_mode: :none)
   end
   private_class_method :client
 
@@ -43,12 +43,8 @@ class CensusClient
     validate_parameters!(document_number, formatted_birthdate, postal_code)
 
     {
-      idioma: 'ca/es',
       dni: document_number,
-      letra: '', # letter is not checked by census
-      obs: '',
-      obj: '',
-      datanaixement: formatted_birthdate,
+      datan: formatted_birthdate,
       cp: postal_code
     }
   end
@@ -71,7 +67,7 @@ class CensusClient
     message.merge(
       dni: obfuscated_document_number(message[:dni]),
       cp: obfuscated_postal_code(message[:cp]),
-      datanaixement: obfuscated_formatted_birthdate(message[:datanaixement])
+      datan: obfuscated_formatted_birthdate(message[:datan])
     )
   end
 
