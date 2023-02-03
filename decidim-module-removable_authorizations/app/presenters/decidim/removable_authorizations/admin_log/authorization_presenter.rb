@@ -26,12 +26,12 @@ module Decidim
 
         def i18n_params
           super.merge(
-            recipient_name: recipient_presenter.present
+            recipient_name: recipient_presenter&.present
           )
         end
 
         def recipient_presenter
-          @recipient_presenter ||= Decidim::Log::UserPresenter.new(recipient, h, recipient_data)
+          @recipient_presenter ||= Decidim::Log::UserPresenter.new(recipient, h, recipient_data) if recipient_data
         end
 
         def recipient_data
@@ -39,7 +39,7 @@ module Decidim
         end
 
         def recipient
-          Decidim::User.find_by(id: recipient_data["id"])
+          Decidim::User.find_by(id: recipient_data["id"]) if recipient_data
         end
       end
     end
