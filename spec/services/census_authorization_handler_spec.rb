@@ -8,7 +8,6 @@ describe CensusAuthorizationHandler do
   let(:handler) { described_class.from_params(params) }
   let(:document_number) { "12345678" }
   let(:date_of_birth) { Date.civil(1987, 9, 17) }
-  let(:postal_code) { '12345' }
   let(:user) { create(:user, organization: organization) }
   let(:other_user) { create(:user, organization: organization) }
   let(:organization) { create :organization }
@@ -16,8 +15,7 @@ describe CensusAuthorizationHandler do
     {
       user: user,
       document_number: document_number,
-      date_of_birth: date_of_birth,
-      postal_code: postal_code
+      date_of_birth: date_of_birth
     }
   end
   let(:official_name) { "Napoleón Bonaparte" }
@@ -79,8 +77,7 @@ describe CensusAuthorizationHandler do
     it "avoids duplicates" do
       handler_params = {
         document_number: "12345678A",
-        date_of_birth: date_of_birth,
-        postal_code: postal_code
+        date_of_birth: date_of_birth
       }
 
       first_handler = described_class.from_params(
