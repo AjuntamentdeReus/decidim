@@ -5,12 +5,11 @@ class CensusClient
 
   class InvalidParameter < StandardError; end
 
-  def self.make_request(original_document_number, original_formatted_birthdate, original_postal_code)
+  def self.make_request(original_document_number, original_formatted_birthdate)
     document_number = original_document_number.dup.to_s
     formatted_birthdate = original_formatted_birthdate.dup.to_s
-    postal_code = original_postal_code.dup
 
-    message = build_message(document_number, formatted_birthdate, postal_code)
+    message = build_message(document_number, formatted_birthdate)
 
     Rails.logger.info "[Census WS] Sending request with message: #{obfuscated_message(message)}"
 
@@ -34,18 +33,17 @@ class CensusClient
   end
   private_class_method :client
 
-  def self.build_message(document_number, formatted_birthdate, postal_code)
+  def self.build_message(document_number, formatted_birthdate)
     # if document matches DNI pattern or NIE, remove last letter
     if (/^\d{8}[a-zA-Z]$/.match(document_number)) || (/^[a-zA-Z]\d{7}[a-zA-Z]$/.match(document_number))
       document_number.chop!
     end
 
-    validate_parameters!(document_number, formatted_birthdate, postal_code)
+    validate_parameters!(document_number, formatted_birthdate)
 
     {
       dni: document_number,
-      datan: formatted_birthdate,
-      cp: postal_code
+      datan: formatted_birthdate
     }
   end
   private_class_method :build_message
@@ -55,9 +53,9 @@ class CensusClient
   end
   private_class_method :census_endpoint
 
-  def self.validate_parameters!(document_number, formatted_birthdate, postal_code)
-    if /^\d{5}$/.match(postal_code).nil? || /^\d{2}\/\d{2}\/\d{4}$/.match(formatted_birthdate).nil?
-      Rails.logger.info "[Census WS] Attempted to build invalid message: document_number=#{obfuscated_document_number(document_number)}, formatted_birthdate=#{obfuscated_formatted_birthdate(formatted_birthdate)}, postal_code=#{obfuscated_postal_code(postal_code)}"
+  def self.validate_parameters!(document_number, formatted_birthdate)
+    if /\A\d{2}\/\d{2}\/\d{4}\z/.match(formatted_birthdate).nil?
+      Rails.logger.info "[Census WS] Attempted to build invalid message: document_number=#{obfuscated_document_number(document_number)}, formatted_birthdate=#{obfuscated_formatted_birthdate(formatted_birthdate)}}"
       raise InvalidParameter
     end
   end
@@ -66,7 +64,6 @@ class CensusClient
   def self.obfuscated_message(message)
     message.merge(
       dni: obfuscated_document_number(message[:dni]),
-      cp: obfuscated_postal_code(message[:cp]),
       datan: obfuscated_formatted_birthdate(message[:datan])
     )
   end
@@ -83,13 +80,6 @@ class CensusClient
     obfuscated_formatted_birthdate = formatted_birthdate.dup
     obfuscated_formatted_birthdate[0..1] = "**"
     obfuscated_formatted_birthdate
-  end
-
-  def self.obfuscated_postal_code(postal_code)
-    return "<invalid length>" if postal_code.length < 5
-    obfuscated_postal_code = postal_code.dup
-    obfuscated_postal_code[3..4] = "**"
-    obfuscated_postal_code
   end
 
 end

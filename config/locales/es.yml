@@ -6,7 +6,6 @@ es:
         date_of_birth: Fecha de nacimiento
         document_number: Número del documento de identidad (DNI o NIE sin la letra final)
         official_name_custom: Nombre oficial
-        postal_code: Código postal
         telephone_number_custom: Teléfono personal
       user:
         official_name_custom: Nombre oficial
@@ -23,7 +22,6 @@ es:
         day: Día
         month: Mes
         year: Año
-      postal_code_help: Si desea consultar el código postal que tiene o le da algún error al validarlo, consulte la siguiente web de Correos en %{link} en la opción búsqueda de código postal; así podrá consultar el código postal de la dirección donde esté empadronado/a.
   custom_errors:
     telephone_format: Sólo dígitos (y al menos 9)
   decidim:
