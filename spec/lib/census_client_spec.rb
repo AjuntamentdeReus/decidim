@@ -19,8 +19,7 @@ describe CensusClient do
 
     let(:dni_number) { '12345678' }
     let(:birthdate) { Date.civil(1994, 12, 30).strftime('%d/%m/%Y') }
-    let(:postal_code) { '12345' }
-    let(:census_reponse) { CensusClient.make_request(dni_number, birthdate, postal_code) }
+    let(:census_reponse) { CensusClient.make_request(dni_number, birthdate) }
     let(:census_response_code) { "0" }
 
     before { stub_census_client(validarpadro_decidim_response: { result: census_response_code }) }

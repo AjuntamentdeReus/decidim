@@ -24,7 +24,6 @@ describe "Verification", type: :system do
     select "12", from: "authorization_handler_date_of_birth_3i"
     select "Gener", from: "authorization_handler_date_of_birth_2i"
     select "1979", from: "authorization_handler_date_of_birth_1i"
-    fill_in "authorization_handler[postal_code]", with: "12345"
 
     if options[:with_custom_fields]
       fill_in "authorization_handler[official_name_custom]", with: official_name

@@ -11,14 +11,12 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
   NORMALIZE_TELEPHONE_REGEXP = /\.|\ |\-|\_/
 
   attribute :document_number, String
-  attribute :postal_code, String
   attribute :date_of_birth, Date
   attribute :official_name_custom, String
   attribute :telephone_number_custom, String
 
   validates :date_of_birth, presence: true
   validates :document_number, presence: true
-  validates :postal_code, presence: true, format: { with: /\A[0-9]*\z/ }, length: { is: 5 }
 
   validates :official_name_custom, presence: true, length: { minimum: 3 }, if: ->(form) do
     form.user.official_name_custom.blank? && !form.user.managed
@@ -56,7 +54,7 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
   private
 
   def user_exists_in_census
-    @census_response = CensusClient.make_request(document_number, self.class.format_birthdate(date_of_birth), postal_code)
+    @census_response = CensusClient.make_request(document_number, self.class.format_birthdate(date_of_birth))
 
     if !@census_response.registered_in_census?
       errors.add(:base, I18n.t("census_authorization.errors.messages.not_in_census"))
@@ -81,7 +79,6 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
     {
       email: CustomAttributeObfuscator.email(user.email),
       document_number: CustomAttributeObfuscator.document_number(document_number),
-      postal_code: CustomAttributeObfuscator.postal_code(postal_code),
       managed_user: user.managed,
       census_code: @census_response.response_code,
       census_message: census_message
@@ -92,7 +89,6 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
     {
       email: CustomAttributeObfuscator.email(user.email, false),
       document_number: CustomAttributeObfuscator.document_number(document_number, false),
-      postal_code: CustomAttributeObfuscator.postal_code(postal_code, false),
       managed_user: user.managed,
       census_code: @census_response.response_code,
       census_message: census_message

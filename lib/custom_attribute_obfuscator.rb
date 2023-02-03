@@ -10,14 +10,6 @@ class CustomAttributeObfuscator < Decidim::RemovableAuthorizations::AttributeObf
     end
   end
 
-  def self.postal_code(value, success = true)
-    if success
-      obfuscate(2, 0, value)
-    else
-      obfuscate(1, 1, value)
-    end
-  end
-
   def self.email(full_email, success = true)
     return nil unless full_email.present? && full_email.include?("@")
 

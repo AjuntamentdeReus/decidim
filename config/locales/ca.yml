@@ -6,7 +6,6 @@ ca:
         date_of_birth: Data de naixement
         document_number: Número del document d'identitat (DNI o NIE sense la lletra final)
         official_name_custom: Nom oficial
-        postal_code: Codi postal
         telephone_number_custom: Telèfon personal
       user:
         official_name_custom: Nom oficial
@@ -23,7 +22,6 @@ ca:
         day: Dia
         month: Mes
         year: Any
-      postal_code_help: Si vol consultar el codi postal que té o li dona algun error al validar-lo, consulti la següent web de Correos en %{link} en l'opció cerca de codi postal; així podrà consultar el seu codi postal de l'adreça on està empadronada.
   custom_errors:
     telephone_format: Només dígits (i almenys 9)
   decidim:

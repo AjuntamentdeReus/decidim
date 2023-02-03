@@ -10,7 +10,7 @@ module Decidim
 
     describe "logging" do
       let(:logged_attributes) { ActionLog.last.extra }
-      let(:extra_params) { { document_number: "12345678X", postal_code: "1" } }
+      let(:extra_params) { { document_number: "12345678X" } }
 
       before { handler.log_successful_authorization }
 
@@ -20,7 +20,6 @@ module Decidim
 
       it "logs obfuscated custom attributes" do
         expect(logged_attributes["document_number"]).to eq("1*******X")
-        expect(logged_attributes["postal_code"]).to eq("*")
       end
     end
   end
