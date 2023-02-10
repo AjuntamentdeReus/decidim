@@ -45,6 +45,7 @@ module Decidim
 
       def self.obfuscate(plain_start_size, plan_end_size, value)
         obfuscated_length = value.length - plain_start_size - plan_end_size
+        obfuscated_length = 0 if obfuscated_length.negative?
 
         plain_start = plain_start_size.zero? ? "" : value[0..plain_start_size - 1]
         obfuscated = "*" * obfuscated_length
