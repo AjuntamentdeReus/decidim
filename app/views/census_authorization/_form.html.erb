@@ -19,9 +19,3 @@
 <% end %>
 
 <%= form.hidden_field :handler_name %>
-
-<% unless @form.try(:disable_submit?) %>
-  <div class="actions">
-    <%= form.submit t("authorize", scope: "decidim.verifications.new"), class: "button expanded" %>
-  </div>
-<% end %>
