@@ -3,11 +3,11 @@ module Decidim
     module Verifications
       module AuthorizeUserOverrides
         def call
-          return transfer_authorization if !handler.unique? && handler.transferrable?
-
           if handler.invalid?
+            conflict = create_verification_conflict
+            notify_admins(conflict) if conflict.present?
+
             handler.log_failed_authorization
-            register_conflict
 
             return broadcast(:invalid)
           end
