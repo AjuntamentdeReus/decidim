@@ -3,7 +3,7 @@ es:
   decidim:
     admin:
       menu:
-        authorizations: Autorizaciones
+        search_authorizations: Buscar autorizaciones
     admin_log:
       authorization:
         delete: "%{user_name} eliminó una autorización de %{recipient_name}"

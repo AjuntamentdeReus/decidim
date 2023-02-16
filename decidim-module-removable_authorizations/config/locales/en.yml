@@ -3,7 +3,7 @@ en:
   decidim:
     admin:
       menu:
-        authorizations: Authorizations
+        search_authorizations: Search authorizations
     admin_log:
       authorization:
         delete: "%{user_name} deleted an authorization of %{recipient_name}"
