@@ -29,7 +29,7 @@ module Decidim
       initializer "decidim_removable_authorizations.admin_user_add_authorizations" do
         Decidim.menu :admin_user_menu do |menu|
           menu.add_item :authorizations,
-            I18n.t("menu.authorizations", scope: "decidim.admin"),
+            I18n.t("menu.search_authorizations", scope: "decidim.admin"),
             decidim_removable_authorizations_admin.authorizations_path,
             active: is_active_link?(decidim_removable_authorizations_admin.authorizations_path),
             if: allowed_to?(:delete, :authorization)
