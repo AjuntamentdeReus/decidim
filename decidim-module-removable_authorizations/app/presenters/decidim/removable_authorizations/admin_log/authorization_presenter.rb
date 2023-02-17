@@ -31,11 +31,17 @@ module Decidim
         end
 
         def recipient_presenter
-          @recipient_presenter ||= Decidim::Log::UserPresenter.new(recipient, h, recipient_data) if recipient_data
+          @recipient_presenter ||= Decidim::Log::UserPresenter.new(recipient, h, user_data) if recipient_data
         end
 
+        # {"extra"=>{"authorization_owner"=>{"id"=>9999}}
         def recipient_data
           @recipient_data ||= action_log.extra.dig("extra", "authorization_owner")
+        end
+
+        # {"user"=>{"ip"=>"192.168.192.161", "name"=>"Admin User", "nickname"=>"admin-user"}
+        def user_data
+          @user_data ||= action_log.extra.dig("user")
         end
 
         def recipient

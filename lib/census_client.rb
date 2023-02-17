@@ -3,7 +3,8 @@ require "census_response"
 
 class CensusClient
 
-  class InvalidParameter < StandardError; end
+  class InvalidBirthDate < StandardError; end
+  class InvalidDocumentNumber < StandardError; end
 
   def self.make_request(original_document_number, original_formatted_birthdate)
     document_number = original_document_number.dup.to_s
@@ -24,8 +25,10 @@ class CensusClient
     Rails.logger.info "[Census WS] Response code was: #{response_code}"
 
     return CensusResponse.new(code: response_code)
-  rescue InvalidParameter
-    CensusResponse.new(code: nil, success: false, message: "Paràmetre invàlid")
+  rescue InvalidBirthDate
+    CensusResponse.new(code: nil, success: false, message: "Data naiximent invàlida")
+  rescue InvalidDocumentNumber
+    CensusResponse.new(code: nil, success: false, message: "Número de document invàlid")
   end
 
   def self.client
@@ -55,8 +58,12 @@ class CensusClient
 
   def self.validate_parameters!(document_number, formatted_birthdate)
     if /\A\d{2}\/\d{2}\/\d{4}\z/.match(formatted_birthdate).nil?
-      Rails.logger.info "[Census WS] Attempted to build invalid message: document_number=#{obfuscated_document_number(document_number)}, formatted_birthdate=#{obfuscated_formatted_birthdate(formatted_birthdate)}}"
-      raise InvalidParameter
+      Rails.logger.info "[Census WS] Invalid birthdate: #{formatted_birthdate}"
+      raise InvalidBirthDate
+    end
+    if /\A\d{8}\z/.match(document_number).nil?
+      Rails.logger.info "[Census WS] Invalid document_number: #{document_number}"
+      raise InvalidDocumentNumber
     end
   end
   private_class_method :validate_parameters!
