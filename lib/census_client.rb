@@ -61,7 +61,7 @@ class CensusClient
       Rails.logger.info "[Census WS] Invalid birthdate: #{formatted_birthdate}"
       raise InvalidBirthDate
     end
-    if /\A\d{8}\z/.match(document_number).nil?
+    if /\A\d{8}\z/.match(document_number).nil? && /\A[a-zA-Z]\d{7}\z/.match(document_number).nil?
       Rails.logger.info "[Census WS] Invalid document_number: #{document_number}"
       raise InvalidDocumentNumber
     end
