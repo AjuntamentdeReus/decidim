@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/PopulateTools/decidim-module-question_captcha.git
-  revision: 48767cda54eb92e98e9af928d7fc93c5c98f42d1
+  revision: 53bc2040448338f74a1aeba61651b768b5bb2039
   branch: 0.26_2_update
   specs:
     decidim-question_captcha (0.26.2)
