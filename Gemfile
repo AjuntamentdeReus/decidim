@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.26.8"
+DECIDIM_VERSION = "0.26.2"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
