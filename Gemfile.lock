@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/PopulateTools/decidim-module-processes_admin_stats.git
-  revision: b19a2cb01ad86e6740f85470eede1c9dd5341516
+  revision: 43eb6491647dcd088cae6a5b657b82dba1c6ca55
   branch: main
   specs:
-    decidim-processes_admin_stats (0.26.0)
-      decidim-core (~> 0.26.0)
+    decidim-processes_admin_stats (0.28.0)
+      decidim-core (>= 0.26.0)
 
 GIT
   remote: https://github.com/PopulateTools/decidim-module-question_captcha.git
