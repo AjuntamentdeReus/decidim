@@ -1,8 +1,14 @@
-PATH
-  remote: .
+GIT
+  remote: https://github.com/PopulateTools/decidim-module-processes_admin_stats.git
+  revision: 43eb6491647dcd088cae6a5b657b82dba1c6ca55
+  branch: main
   specs:
     decidim-processes_admin_stats (0.28.0)
       decidim-core (~> 0.28.0)
+
+PATH
+  remote: .
+  specs:
     decidim-removable_authorizations (0.28.0)
       decidim-core (~> 0.28.0)
 
