@@ -49,3 +49,6 @@ yarn-debug.log*
 
 # Static files
 app/views/static/
+
+# Tailwind
+tailwind.config.js
