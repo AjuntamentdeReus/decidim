@@ -1,6 +1,12 @@
-<h2 class="process-title-summary">
-  <%= t(".title") %>
-</h2>
+<% add_decidim_page_title(t(".title")) %>
+
+<div class="item_show__header">
+  <h1 class="item_show__header-title">
+    <%= t(".title") %>
+  </h1>
+</div>
+
+<div class="item__edit-form">
 
 <%= decidim_form_for(@form, url: delete_authorizations_path, html: { class: "form delete_verifications" }) do |f| %>
   <div class="card">
@@ -9,7 +15,11 @@
     </div>
   </div>
 
-  <div class="button--double form-general-submit">
-    <%= f.submit t(".search"), data: { confirm: t(".confirm_destroy") } %>
+  <div class="item__edit-sticky">
+    <div class="item__edit-sticky-container">
+      <%= f.submit t(".search"), class: "button button__sm button__secondary", data: { confirm: t(".confirm_destroy") } %>
+    </div>
   </div>
+
 <% end %>
+  </div>
