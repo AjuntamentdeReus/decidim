@@ -4,7 +4,7 @@ GIT
   branch: main
   specs:
     decidim-processes_admin_stats (0.28.0)
-      decidim-core (~> 0.28.0)
+      decidim-core (>= 0.26.0)
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
@@ -16,6 +16,15 @@ GIT
       decidim-core (>= 0.28.0, < 0.29)
       deface (>= 1.5)
       sassc (~> 2.3)
+
+GIT
+  remote: https://github.com/mainio/decidim-module-term_customizer.git
+  revision: 03e6c98e85a00fe47f8db2726f1a1a98e808efda
+  branch: main
+  specs:
+    decidim-term_customizer (0.28.0)
+      decidim-admin (~> 0.28.0)
+      decidim-core (~> 0.28.0)
 
 PATH
   remote: .
@@ -848,6 +857,7 @@ DEPENDENCIES
   decidim-dev (= 0.28.0)
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
+  decidim-term_customizer!
   deface
   faker (~> 3.2)
   letter_opener_web (~> 1.4)
