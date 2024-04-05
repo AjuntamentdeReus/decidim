@@ -283,4 +283,7 @@ Rails.application.reloader.to_prepare do
       @user.telephone_number_custom = @form.telephone_number_custom
     end
   end
+
+  ::Decidim.icons.register(name: "fingerprint-2-line", icon: "fingerprint-2-line", category: "system", description: "", engine: :verifications)
+  ::Decidim.icons.register(name: "message-3-line", icon: "message-3-line", category: "system", description: "", engine: :verifications)
 end
