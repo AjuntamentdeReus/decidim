@@ -106,10 +106,10 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
   end
 
   def census_message
-    if duplicates.none?
+    if duplicate.blank?
       @census_response.message
     else
-      other_user = duplicates.first.user
+      other_user = duplicate.user
 
       """
       Està empadronat, però hi ha #{other_user.managed ? 'un compte administrat' : 'un altre usuari'} verificat amb les mateixes dades
