@@ -26,7 +26,7 @@ describe CensusAuthorizationHandler do
   before do
     user.update_attributes!(official_name_custom: official_name, telephone_number_custom: telephone_number)
     allow_any_instance_of(Savon::Client).to receive(:call).and_return(
-      OpenStruct.new(body: { validarpadro_decidim_response: { result: "0" } })
+      OpenStruct.new(body: { padro_decidim_response: { acces: "0" } })
     )
   end
 

@@ -22,7 +22,7 @@ describe CensusClient do
     let(:census_reponse) { CensusClient.make_request(dni_number, birthdate) }
     let(:census_response_code) { "0" }
 
-    before { stub_census_client(validarpadro_decidim_response: { result: census_response_code }) }
+    before { stub_census_client(padro_decidim_response: { acces: census_response_code }) }
 
     subject { census_reponse }
 
