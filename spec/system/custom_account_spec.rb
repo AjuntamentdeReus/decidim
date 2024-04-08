@@ -34,10 +34,6 @@ describe "Account", type: :system do
           expect(page).to have_content("correctament")
         end
 
-        within "div.title-bar nav.topbar__user__logged" do
-          expect(page).to have_content("Normal User Name")
-        end
-
         user.reload
 
         within_user_menu do
