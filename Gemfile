@@ -19,7 +19,6 @@ gem "bootsnap", require: false
 gem "puma", ">= 6.3"
 gem "uglifier", ">= 1.3.0"
 gem "faker", "~> 3.2"
-gem "rollbar"
 gem "savon"
 gem "progressbar"
 gem "deface"

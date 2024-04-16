@@ -523,6 +523,8 @@ GEM
       net-protocol
     nio4r (2.7.1)
     nkf (0.2.0)
+    nokogiri (1.16.3-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.3-x86_64-linux)
       racc (~> 1.4)
     nori (2.7.0)
@@ -659,7 +661,6 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
-    rollbar (3.5.2)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -846,6 +847,7 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -864,7 +866,6 @@ DEPENDENCIES
   listen (~> 3.1)
   progressbar
   puma (>= 6.3)
-  rollbar
   rspec
   savon
   sidekiq (~> 5.2.1)
