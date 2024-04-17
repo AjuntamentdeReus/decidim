@@ -29,11 +29,18 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "rspec"
   gem "decidim-dev", DECIDIM_VERSION
+  gem "capistrano"
+  gem "capistrano-bundler"
+  gem "capistrano-passenger"
+  gem "capistrano-rails"
+  gem "capistrano-rbenv"
+  gem "capistrano-sidekiq"
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 end
 
 group :development do
   gem "listen", "~> 3.1"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console"
 end
