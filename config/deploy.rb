@@ -28,8 +28,10 @@ set :passenger_restart_with_touch, true
 # TODO
 # set :sidekiq_role, :app
 # set :sidekiq_service_unit_name, 'sidekiq-decidim'
-set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, "v16.9.1"
+set :nvm_type, :system
+set :nvm_node_path, '/var/lib/nvm/versions/node/'
+set :nvm_path, '/var/lib/nvm/'
+set :nvm_node, 'v18.17.1' # tls
 set :keep_releases, 10
 
 Rake::Task["deploy:compile_assets"].clear
