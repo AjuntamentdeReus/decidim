@@ -1,2 +1,0 @@
-<!-- insert_after ".form__wrapper erb[loud]:contains('f.text_field :name')" -->
-<%= f.text_field :official_name_custom, help_text: t("decidim.devise.registrations.new.official_name_custom_help") %>
