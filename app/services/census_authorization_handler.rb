@@ -7,25 +7,18 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
 
   include Decidim::HumanizeBooleansHelper
 
-  TELEPHONE_NUMBER_REGEXP = /^\d{9,}$/
-  NORMALIZE_TELEPHONE_REGEXP = /\.|\ |\-|\_/
-
   attribute :document_number, String
   attribute :date_of_birth, Date
-  attribute :official_name_custom, String
   attribute :telephone_number_custom, String
 
   validates :date_of_birth, presence: true
   validates :document_number, presence: true
-
-  validates :official_name_custom, presence: true, length: { minimum: 3 }, if: ->(form) do
-    form.user.official_name_custom.blank? && !form.user.managed
-  end
-  validates :telephone_number_custom, presence: true, if: ->(form) do
-    form.user.telephone_number_custom.blank? && !form.user.managed
-  end
-  validate :telephone_number_custom_format, unless: ->(form) { form.user.managed }
-
+  validates :telephone_number_custom, presence: true, if: :phone_number?
+  validates(
+    :telephone_number_custom,
+    format: { with: ->(form) { Regexp.new(form.organization.extra_user_field_configuration(:phone_number)["pattern"]) } },
+    if: :phone_number_format?
+  )
   validate :user_exists_in_census # must be declared as the last validation so custom
                                   # fields are not saved unless census call succeeds
 
@@ -51,27 +44,34 @@ class CensusAuthorizationHandler < Decidim::AuthorizationHandler
     self.class.build_unique_id(document_number, date_of_birth)
   end
 
+  def organization
+    @organization ||= user.organization
+  end
+
+  def phone_number?
+    extra_user_fields_enabled && organization.activated_extra_field?(:phone_number) && user.extended_data["phone_number"].blank?
+  end
+
   private
+
+  def phone_number_format?
+    return unless phone_number?
+
+    organization.extra_user_field_configuration(:phone_number)["pattern"].present?
+  end
+
+  def extra_user_fields_enabled
+    @extra_user_fields_enabled ||= organization.extra_user_fields_enabled?
+  end
 
   def user_exists_in_census
     @census_response = CensusClient.make_request(document_number, self.class.format_birthdate(date_of_birth))
 
     if !@census_response.registered_in_census?
       errors.add(:base, @census_response.message)
-    elsif [telephone_number_custom, official_name_custom].any?(&:present?) && errors.empty?
-      user.telephone_number_custom = telephone_number_custom if telephone_number_custom.present?
-      user.official_name_custom = official_name_custom if official_name_custom.present?
+    elsif errors.empty?
+      user.extended_data = (user&.extended_data || {}).merge(phone_number: telephone_number_custom) if phone_number?
       user.save!
-    end
-  end
-
-  def telephone_number_custom_format
-    return unless user.telephone_number_custom.blank?
-
-    self.telephone_number_custom = telephone_number_custom.to_s.gsub(NORMALIZE_TELEPHONE_REGEXP, "")
-
-    unless TELEPHONE_NUMBER_REGEXP =~ telephone_number_custom
-      errors.add(:telephone_number_custom, I18n.t("custom_errors.telephone_format"))
     end
   end
 
