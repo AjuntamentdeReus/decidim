@@ -12,11 +12,17 @@ def stub_census_client_for_success
 end
 
 describe "Verification", type: :system do
-  let(:organization) { create(:organization, available_authorizations: ["census_authorization_handler"]) }
+  let(:organization) { create(:organization, available_authorizations: ["census_authorization_handler"], extra_user_fields:) }
+  let(:extra_user_fields) do
+    {
+      "enabled" => true,
+      "phone_number" => { "enabled" => true, "pattern" => phone_number_pattern, "placeholder" => nil }
+    }
+  end
+  let(:phone_number_pattern) { "^(\\+34)?[0-9 ]{9,12}$" }
   let(:user) { create(:user, :confirmed, password: password, password_confirmation: password, organization: organization) }
   let(:password) { "dqCFgjfDbC7dPbrv" }
-  let(:official_name) { "Napoleón Bonaparte" }
-  let(:telephone_number) { "123456789" }
+  let(:telephone_number) { "999 456 789" }
   let(:document_number) { "12345678" }
   let(:date_of_birth) { Date.new(1979, 1, 12) }
 
@@ -25,8 +31,7 @@ describe "Verification", type: :system do
     fill_in :authorization_handler_date_of_birth, with: date_of_birth
 
     if options[:with_custom_fields]
-      fill_in "authorization_handler[official_name_custom]", with: official_name
-      fill_in "authorization_handler[telephone_number_custom]", with: "123 456.789"
+      fill_in "authorization_handler[telephone_number_custom]", with: "999 456 789"
     end
   end
 
@@ -41,7 +46,7 @@ describe "Verification", type: :system do
 
     before { stub_census_client_for_success }
 
-    describe "when official name and telephone number are missing" do
+    describe "when telephone number is missing" do
       it "sets them and creates the authorization" do
         click_link "Padró municipal"
 
@@ -53,8 +58,7 @@ describe "Verification", type: :system do
 
         user.reload
 
-        expect(user.official_name_custom).to eq(official_name)
-        expect(user.telephone_number_custom).to eq(telephone_number)
+        expect(user.extended_data["phone_number"]).to eq(telephone_number)
         expect(::Decidim::Authorization.exists?(decidim_user_id: user.id)).to be_truthy
       end
     end
@@ -64,7 +68,6 @@ describe "Verification", type: :system do
         click_link "Padró municipal"
 
         fill_in_authorization_form
-        fill_in "authorization_handler[official_name_custom]", with: official_name
         fill_in "authorization_handler[telephone_number_custom]", with: "123a"
 
         click_button "Enviar"
@@ -73,21 +76,19 @@ describe "Verification", type: :system do
 
         user.reload
 
-        expect(user.official_name_custom).to be_blank
-        expect(user.telephone_number_custom).to be_blank
+        expect(user.extended_data["phone_number"]).to be_blank
         expect(::Decidim::Authorization.exists?(decidim_user_id: user.id)).to be_falsey
       end
     end
 
-    describe "when official name and telephone number are already set" do
+    describe "when telephone number is already set" do
       before do
-        user.update(official_name_custom: official_name, telephone_number_custom: telephone_number)
+        user.update(extended_data: { "phone_number" => telephone_number })
       end
 
       it "creates the authorization" do
         click_link "Padró municipal"
 
-        refute has_field? "authorization_handler[official_name_custom]"
         refute has_field? "authorization_handler[telephone_number_custom]"
 
         fill_in_authorization_form
@@ -98,8 +99,7 @@ describe "Verification", type: :system do
 
         user.reload
 
-        expect(user.official_name_custom).to eq(official_name)
-        expect(user.telephone_number_custom).to eq(telephone_number)
+        expect(user.extended_data["phone_number"]).to eq(telephone_number)
         expect(::Decidim::Authorization.exists?(decidim_user_id: user.id)).to be_truthy
       end
     end
@@ -121,8 +121,7 @@ describe "Verification", type: :system do
 
       user.reload
 
-      expect(user.official_name_custom).to be_nil
-      expect(user.telephone_number_custom).to be_nil
+      expect(user.extended_data["phone_number"]).to be_nil
       expect(::Decidim::Authorization.exists?(decidim_user_id: user.id)).to be_falsey
     end
 

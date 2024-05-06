@@ -82,7 +82,8 @@ namespace :anonymize do
         last_sign_in_ip: nil,
         invitation_token: nil,
         confirmation_token: nil,
-        unconfirmed_email: nil
+        unconfirmed_email: nil,
+        extended_data: { "phone_number" => "123456789" }
       )
 
       Decidim::Authorization.where(user: user).find_each do |authorization|

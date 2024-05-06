@@ -1,4 +1,14 @@
 GIT
+  remote: https://github.com/PopulateTools/decidim-module-extra_user_fields.git
+  revision: b669e62862f875d5203b02aa085d78168ca8701e
+  branch: bump-0.28-phone-number
+  specs:
+    decidim-extra_user_fields (0.28.0)
+      country_select (~> 4.0)
+      decidim-core (>= 0.28)
+      deface (~> 1.5)
+
+GIT
   remote: https://github.com/PopulateTools/decidim-module-processes_admin_stats.git
   revision: 43eb6491647dcd088cae6a5b657b82dba1c6ca55
   branch: main
@@ -182,6 +192,13 @@ GEM
     commonmarker (0.23.10)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
+    countries (3.1.0)
+      i18n_data (~> 0.11.0)
+      sixarm_ruby_unaccent (~> 1.1)
+      unicode_utils (~> 1.4)
+    country_select (4.0.0)
+      countries (~> 3.0)
+      sort_alphabetical (~> 1.0)
     crack (1.0.0)
       bigdecimal
       rexml
@@ -477,6 +494,7 @@ GEM
       rails-i18n
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
+    i18n_data (0.11.0)
     icalendar (2.10.1)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
@@ -551,16 +569,6 @@ GEM
     net-ssh (7.2.3)
     nio4r (2.7.1)
     nkf (0.2.0)
-    nokogiri (1.16.4-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-arm-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.4-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     nori (2.7.0)
@@ -808,10 +816,13 @@ GEM
       simplecov (~> 0.19)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    sixarm_ruby_unaccent (1.2.2)
     smart_properties (1.17.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
+    sort_alphabetical (1.1.0)
+      unicode_utils (>= 1.2.2)
     spring (4.2.0)
     spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
@@ -843,6 +854,7 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
+    unicode_utils (1.4.0)
     uniform_notifier (1.16.0)
     uri (0.13.0)
     valid_email2 (4.0.6)
@@ -884,11 +896,6 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
-  arm-linux
-  arm64-darwin
-  x86-linux
-  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
@@ -906,6 +913,7 @@ DEPENDENCIES
   decidim (= 0.28.0)
   decidim-decidim_awesome!
   decidim-dev (= 0.28.0)
+  decidim-extra_user_fields!
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
   decidim-term_customizer!
