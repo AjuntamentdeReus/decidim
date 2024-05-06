@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/PopulateTools/decidim-module-extra_user_fields.git
-  revision: b420da179045e81afbb0efb1af36b227cf09dfac
+  revision: b669e62862f875d5203b02aa085d78168ca8701e
   branch: bump-0.28-phone-number
   specs:
     decidim-extra_user_fields (0.28.0)
@@ -569,16 +569,6 @@ GEM
     net-ssh (7.2.3)
     nio4r (2.7.1)
     nkf (0.2.0)
-    nokogiri (1.16.4-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-arm-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.4-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.4-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     nori (2.7.0)
@@ -906,11 +896,6 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
-  arm-linux
-  arm64-darwin
-  x86-linux
-  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
