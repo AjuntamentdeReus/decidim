@@ -18,8 +18,8 @@ GIT
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
-  revision: c2aba07f02a82c625ad60786fb54f0b878f42bc4
-  branch: develop
+  revision: a9ebf8c473e989664ce6929c76e3485a94942307
+  branch: users_autoblock
   specs:
     decidim-decidim_awesome (0.11.0)
       decidim-admin (>= 0.28.0, < 0.29)
