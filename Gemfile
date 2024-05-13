@@ -12,6 +12,7 @@ gem "decidim-processes_admin_stats", git: "https://github.com/PopulateTools/deci
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "main"
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: "users_autoblock"
 gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "bump-0.28-phone-number"
+gem "decidim-idcat_mobil", git: "https://github.com/PopulateTools/decidim-module-idcat_mobil.git", branch: "upgrade_0.28"
 
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "release/0.27-stable"
 gem "acts_as_textcaptcha", "~> 4.6.0"

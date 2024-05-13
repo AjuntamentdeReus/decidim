@@ -201,4 +201,5 @@ NORMALIZE_TELEPHONE_REGEXP = /\.|\ |\-|\_/
 Rails.application.reloader.to_prepare do
   ::Decidim.icons.register(name: "fingerprint-2-line", icon: "fingerprint-2-line", category: "system", description: "", engine: :verifications)
   ::Decidim.icons.register(name: "message-3-line", icon: "message-3-line", category: "system", description: "", engine: :verifications)
+  ::Decidim.icons.register(name: "smartphone-line", icon: "smartphone-line", category: "system", description: "", engine: :core)
 end
