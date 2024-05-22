@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/PopulateTools/decidim-module-idcat_mobil.git
-  revision: 4dbe9d6fe9af0d7a26b50e02e99979d6739fdd01
+  revision: 6803b56f7d1235cff3ac10545006b8c0ec56ce48
   branch: upgrade_0.28
   specs:
     decidim-idcat_mobil (0.4.0)
