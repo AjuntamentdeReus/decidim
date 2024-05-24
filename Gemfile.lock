@@ -9,22 +9,23 @@ GIT
       deface (~> 1.5)
 
 GIT
-  remote: https://github.com/PopulateTools/decidim-module-idcat_mobil.git
-  revision: 6803b56f7d1235cff3ac10545006b8c0ec56ce48
-  branch: upgrade_0.28
-  specs:
-    decidim-idcat_mobil (0.4.0)
-      decidim (>= 0.28.0)
-      decidim-core (>= 0.28.0)
-      omniauth-idcat_mobil (~> 0.5.0)
-
-GIT
   remote: https://github.com/PopulateTools/decidim-module-processes_admin_stats.git
   revision: 43eb6491647dcd088cae6a5b657b82dba1c6ca55
   branch: main
   specs:
     decidim-processes_admin_stats (0.28.0)
       decidim-core (>= 0.26.0)
+
+GIT
+  remote: https://github.com/PopulateTools/decidim-module-trusted-ids
+  revision: de090b41c8bd2d04bca6047f01fb27f280dc7204
+  branch: upgrade-0.28
+  specs:
+    decidim-trusted_ids (0.7.0)
+      decidim (>= 0.27.0, < 0.29)
+      decidim-core (>= 0.27.0, < 0.29)
+      decidim-verifications (>= 0.27.0, < 0.29)
+      deface (>= 1.5)
 
 GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
@@ -607,9 +608,6 @@ GEM
       oauth2 (~> 2.0)
       omniauth (~> 2.0)
       omniauth-oauth2 (~> 1.8)
-    omniauth-idcat_mobil (0.5.0)
-      omniauth (~> 2.0.4)
-      omniauth-oauth2 (>= 1.7.2, < 2.0)
     omniauth-oauth (1.2.0)
       oauth
       omniauth (>= 1.0, < 3)
@@ -927,10 +925,10 @@ DEPENDENCIES
   decidim-decidim_awesome!
   decidim-dev (= 0.28.0)
   decidim-extra_user_fields!
-  decidim-idcat_mobil!
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
   decidim-term_customizer!
+  decidim-trusted_ids!
   deface
   ed25519 (>= 1.2, < 2.0)
   faker (~> 3.2)
