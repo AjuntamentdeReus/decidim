@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_05_173152) do
+ActiveRecord::Schema.define(version: 2024_05_24_135206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "ltree"
@@ -559,56 +559,6 @@ ActiveRecord::Schema.define(version: 2024_04_05_173152) do
     t.index ["decidim_scope_id"], name: "index_decidim_debates_debates_on_decidim_scope_id"
     t.index ["decidim_user_group_id"], name: "index_decidim_debates_debates_on_decidim_user_group_id"
     t.index ["endorsements_count"], name: "idx_decidim_debates_debates_on_endorsemnts_count"
-  end
-
-  create_table "decidim_dummy_resources_coauthorable_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.string "title"
-    t.string "body"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "published_at"
-    t.integer "coauthorships_count", default: 0, null: false
-    t.integer "endorsements_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.bigint "decidim_component_id"
-    t.bigint "decidim_category_id"
-    t.bigint "decidim_scope_id"
-    t.string "reference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "decidim_dummy_resources_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.jsonb "title"
-    t.string "body"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "published_at"
-    t.integer "coauthorships_count", default: 0, null: false
-    t.integer "endorsements_count", default: 0, null: false
-    t.integer "comments_count", default: 0, null: false
-    t.integer "follows_count", default: 0, null: false
-    t.bigint "decidim_component_id"
-    t.integer "decidim_author_id"
-    t.string "decidim_author_type"
-    t.integer "decidim_user_group_id"
-    t.bigint "decidim_category_id"
-    t.bigint "decidim_scope_id"
-    t.string "reference"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "decidim_dummy_resources_nested_dummy_resources", force: :cascade do |t|
-    t.jsonb "translatable_text"
-    t.string "title"
-    t.bigint "dummy_resource_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "decidim_editor_images", force: :cascade do |t|
@@ -1769,6 +1719,17 @@ ActiveRecord::Schema.define(version: 2024_04_05_173152) do
     t.boolean "confidential", default: true, null: false
     t.index ["decidim_organization_id"], name: "index_oauth_applications_on_decidim_organization_id"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  end
+
+  create_table "organization_trusted_ids_configs", force: :cascade do |t|
+    t.integer "decidim_organization_id", null: false
+    t.string "handler"
+    t.jsonb "settings", default: {}, null: false
+    t.integer "expiration_days"
+    t.jsonb "tos", default: {}, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["decidim_organization_id"], name: "index_decidim_trusted_ids_organization"
   end
 
   create_table "versions", force: :cascade do |t|
