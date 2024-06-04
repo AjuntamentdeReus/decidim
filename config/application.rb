@@ -17,6 +17,9 @@ module DecidimApplication
     config.i18n.enforce_available_locales = false
     config.i18n.fallbacks = {ca: [:en], es: [:en]}
 
+    config.to_prepare do
+      Decidim::Devise::OmniauthRegistrationsController.prepend(Decidim::ExtraUserFields::IncludeExtraData)
+    end
   end
 end
 
