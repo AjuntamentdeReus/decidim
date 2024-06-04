@@ -17,6 +17,17 @@ GIT
       decidim-core (>= 0.26.0)
 
 GIT
+  remote: https://github.com/PopulateTools/decidim-module-trusted-ids
+  revision: de090b41c8bd2d04bca6047f01fb27f280dc7204
+  branch: upgrade-0.28
+  specs:
+    decidim-trusted_ids (0.7.0)
+      decidim (>= 0.27.0, < 0.29)
+      decidim-core (>= 0.27.0, < 0.29)
+      decidim-verifications (>= 0.27.0, < 0.29)
+      deface (>= 1.5)
+
+GIT
   remote: https://github.com/decidim-ice/decidim-module-decidim_awesome.git
   revision: b2800256f5e147452438686029b3990c89fb21be
   branch: develop
@@ -958,6 +969,7 @@ DEPENDENCIES
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
   decidim-term_customizer!
+  decidim-trusted_ids!
   deface
   ed25519 (>= 1.2, < 2.0)
   faker (~> 3.2)
