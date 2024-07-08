@@ -50,35 +50,23 @@ namespace :deploy do
 
   desc "Compile assets"
   task :compile_assets => [:set_rails_env] do
-    invoke "deploy:decidim_webpacker_install"
     invoke "deploy:install_dependencies"
-    invoke "deploy:webpacker_compile"
+    invoke "deploy:assets_precompile"
   end
 
   desc "Install dependencies"
   task :install_dependencies do
     on roles(:all) do
-      execute "cd #{release_path};  nvm use; $HOME/.nvm/versions/node/#{fetch(:nvm_node)}/bin/npm install"
+      execute "cd #{release_path}; npm install"
     end
   end
 
-  desc "Webpacker compile"
-  task :webpacker_compile do
+  desc "Assets precompile"
+  task :assets_precompile do
     on roles(:all) do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :rails, "webpacker:compile"
-        end
-      end
-    end
-  end
-
-  desc "Decidim webpacker configuration"
-  task :decidim_webpacker_install do
-    on roles(:all) do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, "decidim:webpacker:install"
+          execute :rails, "assets:precompile"
         end
       end
     end
