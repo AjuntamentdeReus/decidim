@@ -46,3 +46,9 @@ storage
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Static files
+app/views/static/
+
+# Tailwind
+tailwind.config.js

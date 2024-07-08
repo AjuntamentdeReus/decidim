@@ -24,9 +24,9 @@ describe CensusAuthorizationHandler do
   it_behaves_like "an authorization handler"
 
   before do
-    user.update_attributes!(official_name_custom: official_name, telephone_number_custom: telephone_number)
+    user.update(official_name_custom: official_name, telephone_number_custom: telephone_number)
     allow_any_instance_of(Savon::Client).to receive(:call).and_return(
-      OpenStruct.new(body: { validarpadro_decidim_response: { result: "0" } })
+      OpenStruct.new(body: { padro_decidim_response: { acces: "0" } })
     )
   end
 
@@ -98,7 +98,7 @@ describe CensusAuthorizationHandler do
 
       expect(second_handler).to_not be_valid
 
-      Decidim::Verifications::AuthorizeUser.call(second_handler) do
+      Decidim::Verifications::AuthorizeUser.call(second_handler, organization) do
         on(:ok) do
           Decidim::Authorization.create_or_update_from(second_handler)
         end

@@ -4,22 +4,21 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.26.2"
+DECIDIM_VERSION = "0.28.0"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", git: "https://github.com/PopulateTools/decidim-module-processes_admin_stats.git", branch: "main"
+gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "main"
+gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: "develop"
 
-gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
-gem "decidim-decidim_awesome", "~> 0.8"
-gem "decidim-question_captcha", git: "https://github.com/PopulateTools/decidim-module-question_captcha.git", branch: "0.26_2_update"
-gem "acts_as_textcaptcha", "~> 4.5.1"
+# gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "release/0.27-stable"
+gem "acts_as_textcaptcha", "~> 4.6.0"
 
 gem "bootsnap", require: false
-gem "puma", ">= 4.3"
+gem "puma", ">= 6.3"
 gem "uglifier", ">= 1.3.0"
-gem "faker", "~> 2.14"
-gem "rollbar"
+gem "faker", "~> 3.2"
 gem "savon"
 gem "progressbar"
 gem "deface"
@@ -30,11 +29,19 @@ group :development, :test do
   gem "byebug", platform: :mri
   gem "rspec"
   gem "decidim-dev", DECIDIM_VERSION
+  gem "capistrano"
+  gem "capistrano-bundler"
+  gem "capistrano-passenger"
+  gem "capistrano-rails"
+  gem "capistrano-rbenv"
+  gem "capistrano-sidekiq"
+  gem "capistrano-nvm", require: false
+  gem 'ed25519', '>= 1.2', '< 2.0'
+  gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 end
 
 group :development do
   gem "listen", "~> 3.1"
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0"
-  gem "web-console"
 end

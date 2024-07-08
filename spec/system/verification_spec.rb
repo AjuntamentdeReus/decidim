@@ -18,12 +18,11 @@ describe "Verification", type: :system do
   let(:official_name) { "Napoleón Bonaparte" }
   let(:telephone_number) { "123456789" }
   let(:document_number) { "12345678" }
+  let(:date_of_birth) { Date.new(1979, 1, 12) }
 
   def fill_in_authorization_form(options = {})
     fill_in "authorization_handler[document_number]", with: document_number
-    select "12", from: "authorization_handler_date_of_birth_3i"
-    select "Gener", from: "authorization_handler_date_of_birth_2i"
-    select "1979", from: "authorization_handler_date_of_birth_1i"
+    fill_in :authorization_handler_date_of_birth, with: date_of_birth
 
     if options[:with_custom_fields]
       fill_in "authorization_handler[official_name_custom]", with: official_name
@@ -32,7 +31,6 @@ describe "Verification", type: :system do
   end
 
   before do
-    allow_any_instance_of(Decidim::CookiesHelper).to receive(:cookies_accepted?).and_return(true)
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit decidim.account_path
@@ -49,9 +47,9 @@ describe "Verification", type: :system do
 
         fill_in_authorization_form(with_custom_fields: true)
 
-        click_button "Autoritzar"
+        click_button "Enviar"
 
-        expect(page).to have_content("Has estat autoritzada amb correctament")
+        expect(page).to have_content("Se t'ha autoritzat correctament")
 
         user.reload
 
@@ -69,7 +67,7 @@ describe "Verification", type: :system do
         fill_in "authorization_handler[official_name_custom]", with: official_name
         fill_in "authorization_handler[telephone_number_custom]", with: "123a"
 
-        click_button "Autoritzar"
+        click_button "Enviar"
 
         expect(page).to have_content("S'ha produït un error en crear l'autorització")
 
@@ -83,7 +81,7 @@ describe "Verification", type: :system do
 
     describe "when official name and telephone number are already set" do
       before do
-        user.update_attributes!(official_name_custom: official_name, telephone_number_custom: telephone_number)
+        user.update(official_name_custom: official_name, telephone_number_custom: telephone_number)
       end
 
       it "creates the authorization" do
@@ -94,9 +92,9 @@ describe "Verification", type: :system do
 
         fill_in_authorization_form
 
-        click_button "Autoritzar"
+        click_button "Enviar"
 
-        expect(page).to have_content("Has estat autoritzada amb correctament")
+        expect(page).to have_content("Se t'ha autoritzat correctament")
 
         user.reload
 
@@ -117,10 +115,9 @@ describe "Verification", type: :system do
 
       fill_in_authorization_form(with_custom_fields: true)
 
-      click_button "Autoritzar"
+      click_button "Enviar"
 
-      expect(page).to have_content("No hem pogut verificar a aquesta persona")
-      expect(page).to have_content("Posa't en contacte amb un administrador (info.participacio@reus.cat / 977.010.029) indicant el teu nom i l'hora actual si vols que revisem el teu cas.")
+      expect(page).to have_content("S'ha produït un error en crear l'autorització")
 
       user.reload
 
@@ -144,7 +141,7 @@ describe "Verification", type: :system do
 
       fill_in_authorization_form(with_custom_fields: true)
 
-      click_button "Autoritzar"
+      click_button "Enviar"
 
       expect(page).to have_content("Ja s'ha verificat un usuari amb aquest document d'identificació. Està associada al compte amb correu-e h***y@potter.com")
       expect(page).to have_content("Tracta d'entrar com a usuari amb aquest compte.")
@@ -168,7 +165,7 @@ describe "Verification", type: :system do
 
       fill_in_authorization_form(with_custom_fields: true)
 
-      click_button "Autoritzar"
+      click_button "Enviar"
 
       expect(page).to have_content("Ja s'ha verificat un usuari amb aquest document d'identificació. Està associada a un compte administrat amb nom Har******ter")
       expect(page).to have_content("Posa't en contacte amb un administrador via email (info.participacio@reus.cat) o telefònica (977.010.029) per promocionar el compte original i poder participar")

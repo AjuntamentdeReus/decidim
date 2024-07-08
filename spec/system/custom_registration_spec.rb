@@ -17,9 +17,6 @@ describe "Registration", type: :system do
   before do
     switch_to_host(organization.host)
     visit decidim.root_path
-    within_language_menu do
-      click_link "Català"
-    end
     visit decidim.new_user_registration_path
   end
 
@@ -28,10 +25,8 @@ describe "Registration", type: :system do
       it "shows fields empty" do
         expect(page).to have_content("Crea un compte per poder participar")
         expect(page).to have_field("registration_user_name", with: "")
-        expect(page).to have_field("registration_user_nickname", with: "")
         expect(page).to have_field("registration_user_email", with: "")
         expect(page).to have_field("registration_user_password", with: "")
-        expect(page).to have_field("registration_user_password_confirmation", with: "")
         expect(page).to have_field("registration_user_newsletter", checked: false)
       end
     end

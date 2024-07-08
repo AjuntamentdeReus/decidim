@@ -43,10 +43,6 @@ describe "Account", type: :system do
           expect(page).to have_content("correctament")
         end
 
-        within "div.title-bar nav.topbar__user__logged" do
-          expect(page).to have_content("Nikola Tesla")
-        end
-
         user.reload
 
         within_user_menu do
@@ -58,56 +54,132 @@ describe "Account", type: :system do
       end
     end
 
-    describe "updating the password" do
-      context "when password and confirmation match" do
-        it "updates the password successfully" do
-          within "form.edit_user" do
-            page.find(".change-password").click
+    describe "when update password" do
+      let!(:encrypted_password) { user.encrypted_password }
+      let(:new_password) { "decidim1234567890" }
 
-            fill_in :user_password, with: "sekritpass123"
-            fill_in :user_password_confirmation, with: "sekritpass123"
+      before do
+        click_button "Canvia la contrasenya"
+      end
 
-            find("*[type=submit]").click
-          end
-
-          within_flash_messages do
-            expect(page).to have_content("correctament")
-          end
-
-          expect(user.reload.valid_password?("sekritpass123")).to eq(true)
+      it "toggles old and new password fields" do
+        within "form.edit_user" do
+          expect(page).to have_content("no ha de ser massa comú (per exemple 123456) i ha de ser diferent del teu àlies i la teva adreça de correu electrònic")
+          expect(page).to have_field("user[password]", with: "", type: "password")
+          expect(page).to have_field("user[old_password]", with: "", type: "password")
+          click_button "Canvia la contrasenya"
+          expect(page).not_to have_field("user[password]", with: "", type: "password")
+          expect(page).not_to have_field("user[old_password]", with: "", type: "password")
         end
       end
 
-      context "when passwords don't match" do
-        it "doesn't update the password" do
+      it "shows fields if password is wrong" do
+        within "form.edit_user" do
+          fill_in "Contrasenya", match: :first, with: new_password
+          fill_in "Contrasenya actual", with: "wrong password12345"
+          find("*[type=submit]").click
+        end
+        expect(page).to have_field("user[password]", with: "decidim1234567890", type: "password")
+        expect(page).to have_content("no és vàlid")
+      end
+
+      it "changes the password with correct password" do
+        within "form.edit_user" do
+          fill_in "Contrasenya", match: :first, with: new_password
+          fill_in "Contrasenya actual", with: password
+          find("*[type=submit]").click
+        end
+        within_flash_messages do
+          expect(page).to have_content("correctament")
+        end
+        expect(user.reload.encrypted_password).not_to eq(encrypted_password)
+        expect(page).not_to have_field("user[password]", with: "", type: "password")
+        expect(page).not_to have_field("user[old_password]", with: "", type: "password")
+      end
+    end
+
+    context "when update email" do
+      let(:pending_email) { "foo@bar.com" }
+
+      context "when typing new email" do
+        before do
           within "form.edit_user" do
-            page.find(".change-password").click
-
-            fill_in :user_password, with: "sekritpass123"
-            fill_in :user_password_confirmation, with: "oopseytypo"
-
+            fill_in "El teu correu electrònic", with: pending_email
             find("*[type=submit]").click
           end
+        end
 
-          within_flash_messages do
-            expect(page).to have_content("error")
+        it "toggles the current password" do
+          expect(page).to have_content("Per tal de confirmar els canvis al teu compte, si us plau, proporciona'ns la teva contrasenya actual.")
+          expect(find("#user_old_password")).to be_visible
+          expect(page).to have_content "Contrasenya actual*"
+          expect(page).not_to have_content "Contrasenya*"
+        end
+
+        it "renders the old password with error" do
+          within "form.edit_user" do
+            find("*[type=submit]").click
+            fill_in :user_old_password, with: "wrong password"
+            find("*[type=submit]").click
           end
-
-          expect(user.reload.valid_password?("sekritpass123")).to eq(false)
+          within ".flash.alert" do
+            expect(page).to have_content "S'ha produït un error en actualitzar el teu compte."
+          end
+          within ".old-user-password" do
+            expect(page).to have_content "no és vàlid"
+          end
         end
       end
 
-      context "when updating the email" do
-        it "needs to confirm it" do
+      context "when correct old password" do
+        before do
           within "form.edit_user" do
-            fill_in :user_email, with: "foo@bar.com"
-
+            fill_in "El teu correu electrònic", with: pending_email
             find("*[type=submit]").click
+            fill_in :user_old_password, with: password
+
+            perform_enqueued_jobs { find("*[type=submit]").click }
           end
 
           within_flash_messages do
-            expect(page).to have_content("correu electrònic per confirmar")
+            expect(page).to have_content("Rebràs un correu electrònic per confirmar la teva nova adreça de correu electrònic.")
           end
+        end
+
+        after do
+          clear_enqueued_jobs
+        end
+
+        it "tells user to confirm new email" do
+          expect(page).to have_content("Verificació del canvi de correu electrònic")
+          expect(page).to have_selector("#user_email[disabled='disabled']")
+          expect(page).to have_content("Hem enviat un correu a #{pending_email} per a verificar la teva nova adreça de correu electrònic")
+        end
+
+        it "resend confirmation" do
+          within "#email-change-pending" do
+            click_link "Tornar a enviar"
+          end
+
+          expect(page).to have_content("Correu de confirmació reenviat amb èxit a #{pending_email}")
+          perform_enqueued_jobs
+          perform_enqueued_jobs
+
+          # the emails also include the update email notification
+          expect(emails.count).to eq(3)
+          visit last_email_link
+          expect(page).to have_content("La teva adreça de correu electrònic s'ha confirmat correctament")
+        end
+
+        it "cancels the email change" do
+          expect(Decidim::User.find(user.id).unconfirmed_email).to eq(pending_email)
+          within "#email-change-pending" do
+            click_link "cancel"
+          end
+
+          expect(page).to have_content("Canvi de correu electrònic cancel·lat amb èxit")
+          expect(page).not_to have_content("Verificació del canvi de correu electrònic")
+          expect(Decidim::User.find(user.id).unconfirmed_email).to be_nil
         end
       end
     end
@@ -118,9 +190,7 @@ describe "Account", type: :system do
       end
 
       it "updates the user's notifications" do
-        within ".switch.newsletter_notifications" do
-          page.find(".switch-paddle").click
-        end
+        page.find("[for='newsletter_notifications']").click
 
         within "form.edit_user" do
           find("*[type=submit]").click
@@ -148,7 +218,7 @@ describe "Account", type: :system do
           expect(page).to have_content("correctament")
         end
 
-        find(".sign-in-link").click
+        click_link("Entra", match: :first)
 
         within ".new_user" do
           fill_in :session_user_email, with: user.email

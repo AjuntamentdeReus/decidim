@@ -14,11 +14,11 @@ module Decidim
       end
 
       def uniqueness
-        return true if unique_id.nil? || duplicates.none?
+        return true if unique_id.nil? || duplicate.blank?
 
         errors.add(
           :base,
-          duplicated_authorization_error_message(duplicates.first.user).html_safe
+          duplicated_authorization_error_message(duplicate.user).html_safe
         )
 
         false

@@ -6,7 +6,7 @@ module Decidim
       # A command with all the business logic to find an authorization by its
       # verification data and delete it.
       #
-      class DestroyAuthorization < Rectify::Command
+      class DestroyAuthorization < Decidim::Command
         # Public: Initializes the command.
         #
         # form         - The form with the authorization info
