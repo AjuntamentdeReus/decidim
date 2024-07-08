@@ -4,14 +4,14 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "0.28.0"
+DECIDIM_VERSION = "0.28.1"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
 gem "decidim-processes_admin_stats", git: "https://github.com/PopulateTools/decidim-module-processes_admin_stats.git", branch: "main"
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "main"
 gem "decidim-decidim_awesome", git: "https://github.com/decidim-ice/decidim-module-decidim_awesome.git", branch: "develop"
-gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "bump-0.28-phone-number"
+gem "decidim-extra_user_fields", git: "https://github.com/PopulateTools/decidim-module-extra_user_fields.git", branch: "release/0.28-stable"
 gem "decidim-trusted_ids", git: "https://github.com/PopulateTools/decidim-module-trusted-ids", branch: "upgrade-0.28"
 
 # gem "decidim-question_captcha", git: "https://github.com/OpenSourcePolitics/decidim-module-question_captcha.git", branch: "release/0.27-stable"
