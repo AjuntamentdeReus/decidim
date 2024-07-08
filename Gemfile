@@ -8,7 +8,8 @@ DECIDIM_VERSION = "0.26.2"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-removable_authorizations", path: "."
-gem "decidim-processes_admin_stats", path: "."
+gem "decidim-processes_admin_stats", git: "https://github.com/PopulateTools/decidim-module-processes_admin_stats.git", branch: "main"
+
 gem "decidim-term_customizer", git: "https://github.com/mainio/decidim-module-term_customizer.git", branch: "develop"
 gem "decidim-decidim_awesome", "~> 0.8"
 gem "decidim-question_captcha", git: "https://github.com/PopulateTools/decidim-module-question_captcha.git", branch: "0.26_2_update"
