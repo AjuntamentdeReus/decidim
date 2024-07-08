@@ -4,9 +4,16 @@ require "spec_helper"
 require "rails_helper"
 
 describe "Account", type: :system do
-  let(:user) { create(:user, :confirmed, password: password, password_confirmation: password) }
+  let(:organization) { create(:organization, extra_user_fields:) }
+  let(:extra_user_fields) do
+    {
+      "enabled" => true,
+      "phone_number" => { "enabled" => true, "pattern" => phone_number_pattern, "placeholder" => nil }
+    }
+  end
+  let(:phone_number_pattern) { "^(\\+34)?[0-9 ]{9,12}$" }
+  let(:user) { create(:user, :confirmed, password:, organization:) }
   let(:password) { "dqCFgjfDbC7dPbrv" }
-  let(:organization) { user.organization }
 
   before do
     switch_to_host(organization.host)
@@ -23,10 +30,9 @@ describe "Account", type: :system do
       it "updates the user's data" do
         within "form.edit_user" do
           fill_in :user_name, with: "Normal User Name"
-          fill_in :user_official_name_custom, with: "Official User Name"
           fill_in :user_personal_url, with: "https://example.org"
           fill_in :user_about, with: "User Biography Text"
-          fill_in :user_telephone_number_custom, with: "123456789"
+          fill_in :user_phone_number, with: "123456789"
           find("*[type=submit]").click
         end
 
@@ -43,11 +49,9 @@ describe "Account", type: :system do
         visit decidim.account_path
 
         expect(page).to have_selector("input[value='Normal User Name']")
-        expect(page).to have_selector("input[value='Official User Name']")
         assert page.has_content?("User Biography Text")
         expect(page).to have_selector("input[value='123456789']")
       end
     end
-
   end
 end

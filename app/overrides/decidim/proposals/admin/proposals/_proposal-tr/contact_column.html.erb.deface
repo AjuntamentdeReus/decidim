@@ -2,10 +2,10 @@
 <td>
     <% proposal.authors.each do |author| %>
 
-      <% author_name = author.try(:official_name_custom) || author.try(:name) || author.try(:title) %>
+      <% author_name = author.try(:name) || author.try(:title) %>
 
-      <% if author.try(:telephone_number_custom).present? %>
-        <%= author_name %> - <%= author.telephone_number_custom %>
+      <% if (phone_number = author.extended_data.try(:dig, "phone_number")).present? %>
+        <%= author_name %> - <%= phone_number %>
       <% else %>
         <%= author_name %>
       <% end %>

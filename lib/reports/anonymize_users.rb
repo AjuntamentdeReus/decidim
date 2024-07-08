@@ -20,6 +20,7 @@ scope.find_each do |user|
     last_sign_in_ip: nil,
     invitation_token: nil,
     confirmation_token: nil,
-    unconfirmed_email: nil
+    unconfirmed_email: nil,
+    extended_data: { "phone_number" => "123456789" }
   )
 end
