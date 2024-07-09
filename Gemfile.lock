@@ -965,6 +965,7 @@ DEPENDENCIES
   decidim-extra_user_fields!
   decidim-processes_admin_stats!
   decidim-removable_authorizations!
+  decidim-templates (= 0.28.1)
   decidim-term_customizer!
   decidim-trusted_ids!
   deface
