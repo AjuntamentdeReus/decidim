@@ -159,7 +159,7 @@ Decidim.configure do |config|
   # Read more: https://docs.decidim.org/en/develop/configure/initializer#_content_security_policy
   config.content_security_policies_extra = {
     "default-src" => %w('self' 'unsafe-inline'),
-    "script-src" => %w('self' 'unsafe-inline' 'unsafe-eval'),
+    "script-src" => %w('self' 'unsafe-inline' 'unsafe-eval' ajax.cloudflare.com),
     "style-src" => %w('self' 'unsafe-inline' fonts.googleapis.com maxcdn.bootstrapcdn.com),
     "img-src" => %w('self' *.hereapi.com data: *.amazonaws.com),
     "font-src" => %w('self' fonts.gstatic.com maxcdn.bootstrapcdn.com),
