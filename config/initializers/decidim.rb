@@ -2,7 +2,7 @@
 
 Decidim.configure do |config|
   config.application_name = "Participa Reus"
-  config.mailer_sender = Rails.application.secrets.mailer_sender
+  config.mailer_sender = Rails.application.secrets.decidim[:mailer_sender]
 
   config.available_locales = %i(ca es en)
 
