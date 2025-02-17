@@ -20,7 +20,6 @@ gem "acts_as_textcaptcha", "~> 4.6.0"
 
 gem "bootsnap", require: false
 gem "puma", ">= 6.3"
-gem "uglifier", ">= 1.3.0"
 gem "faker", "~> 3.2"
 gem "savon"
 gem "progressbar"
