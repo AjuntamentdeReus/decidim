@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/PopulateTools/decidim-module-extra_user_fields.git
-  revision: e9366d108cbf86b9c9b772594b85d2db024f7cc6
+  revision: 6bb40988140e011cf226436412fb261b1a00df68
   branch: interests_field
   specs:
     decidim-extra_user_fields (0.28.0)
