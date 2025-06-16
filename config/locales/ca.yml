@@ -60,6 +60,7 @@ ca:
         elderly: Gent gran
         environment: Medi ambient
         gender_policies: Polítiques de gènere
+        none: No en vull definir cap
         other_topics_of_interest: Altres temes d'interès
         public_health: Salut pública
         public_roads: Via pública
