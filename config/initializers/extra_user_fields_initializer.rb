@@ -20,6 +20,7 @@ Decidim::ExtraUserFields::Settings.configure do |config|
     :associative_network,
     :urban_planning,
     :public_roads,
-    :other_topics_of_interest
+    :other_topics_of_interest,
+    :none
   ]
 end
