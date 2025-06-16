@@ -47,6 +47,29 @@ es:
           official_name_custom_help: Sólo será visible por los administradores. Utilizado para realizar las comunicaciones oficiales.
           telephone_number_custom_help: Sólo será visible por los administradores. Utilizado para realizar las comunicaciones oficiales.
           textcaptcha_answer: Respuesta con caracteres sólamente de texto, no numéricos
+    extra_user_fields:
+      interests:
+        associative_network: Tejido asociativo
+        childhood: Infancia
+        citizen_safety: Seguridad ciudadana
+        city_projection: Proyección de ciudad
+        cooperation: Cooperación
+        culture: Cultura
+        economic_promotion: Promoción económica
+        education: Enseñanza
+        elderly: Personas mayores
+        environment: Medio ambiente
+        gender_policies: Políticas de género
+        none: No quiero definir ninguno
+        other_topics_of_interest: Otros temas de interés
+        public_health: Salud pública
+        public_roads: Vía pública
+        social_welfare: Bienestar social
+        sports: Deportes
+        training_and_employment: Formación y empleo
+        urban_planning: Urbanismo
+        youth: Juventud
+      interests_help: Selecciona aquellos ámbitos que, aparte de las comunicaciones generales, son de tu interés y quieres mantenerte informado/a.
     proposals:
       admin:
         proposals:
