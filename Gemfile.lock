@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/PopulateTools/decidim-module-trusted-ids
-  revision: fbe72b764b7b021d6ac654a32674f0a19f274cd6
+  revision: abee7ee780c6497fbae21985bb7af9e6e85602db
   branch: upgrade-0.28
   specs:
     decidim-trusted_ids (0.7.0)
