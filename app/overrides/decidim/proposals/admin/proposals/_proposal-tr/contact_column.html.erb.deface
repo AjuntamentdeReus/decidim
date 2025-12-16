@@ -2,7 +2,7 @@
 <td>
     <% proposal.authors.each do |author| %>
 
-      <% author_name = author.try(:name) || author.try(:title) %>
+      <% author_name = author.respond_to?(:name) ? author.name : author.try(:presenter)&.title %>
 
       <% if author.respond_to?(:extended_data) && (phone_number = author.extended_data.try(:dig, "phone_number")).present? %>
         <%= author_name %> - <%= phone_number %>
